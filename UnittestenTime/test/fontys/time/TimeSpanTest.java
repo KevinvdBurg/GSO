@@ -134,9 +134,11 @@ public class TimeSpanTest {
         
         int minutes = 10;
         TimeSpan instance = new TimeSpan(bt, et);
+        ITime expBt = new Time(2, 2, 2, 2, 12);
+        ITime expEt = new Time(10, 10, 10, 10, 20);
+        TimeSpan expResult = new TimeSpan(expBt, expEt);
         instance.move(minutes);
-        assertEquals("expected beginTime " + bt.plus(minutes) + " does not equal returned beginTime " + instance.getBeginTime(), bt.plus(minutes), instance.getBeginTime());
-        assertEquals("expected endTime " + et.plus(minutes) + " does not equal returned endTime " + instance.getEndTime(), et.plus(minutes), instance.getEndTime());
+        assertEquals("expected tmeSpan " + expResult.toString() + " does not equal returned beginTime " + instance.toString(), expResult, instance);
     }
 
     /**
@@ -165,12 +167,12 @@ public class TimeSpanTest {
         
         ITimeSpan timeSpan = new TimeSpan(inBt, inEt);
         TimeSpan instance = new TimeSpan(bt, et);
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.isPartOf(timeSpan);
         assertEquals("expected isPartOf " + expResult + " does not equal returned isPartOf " + result, expResult, result);
         
         timeSpan = new TimeSpan(outBt, outEt);
-        expResult = true;
+        expResult = false;
         result = instance.isPartOf(timeSpan);
         assertEquals("expected isPartOF " + expResult + " does not equal returned isPartOf " + result, expResult, result);
     }
