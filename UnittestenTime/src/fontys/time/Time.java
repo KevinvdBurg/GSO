@@ -114,4 +114,10 @@ public class Time implements ITime {
         Time t = (Time) time;
         return (int) ((this.gc.getTimeInMillis() - t.gc.getTimeInMillis()) / 60000);
     }
+    
+    @Override
+    public String toString()
+    {
+        return getYear() + " - " + getMonth() + " - " + getDay() + " " + getHours() + ":" + getMinutes();
+    }
 }

@@ -58,4 +58,6 @@ public interface ITime extends Comparable<ITime> {
      */
     int difference(ITime time);
     
+    @Override
+    String toString();
 }
