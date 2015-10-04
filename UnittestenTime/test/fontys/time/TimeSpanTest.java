@@ -5,6 +5,7 @@
  */
 package fontys.time;
 
+import java.util.Calendar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,7 +17,21 @@ import static org.junit.Assert.*;
  *
  * @author Milton van de Sanden
  */
-public class TimeSpanTest {
+public class TimeSpanTest {  
+    private ITime bt = new Time(2, 2, 2, 2, 2);
+    private ITime et = new Time(10, 10, 10, 10, 10);
+    
+    private ITime correctBt = new Time(3, 3, 3, 3, 3);
+    private ITime incorrectBt = new Time(11, 11, 11, 11, 11);
+    
+    private ITime correctEt = new Time(11, 11, 11, 11, 11);
+    private ITime incorrectEt = new Time(1, 1, 1, 1, 1);
+    
+    private ITime inBt = new Time(3, 3, 3, 3, 3);
+    private ITime inEt = new Time(9, 9, 9, 9, 9);
+    
+    private ITime outBt = new Time(1, 1, 1, 1, 1);
+    private ITime outEt = new Time(11, 11, 11, 11, 11);
     
     public TimeSpanTest() {
     }
@@ -43,12 +58,11 @@ public class TimeSpanTest {
     @Test
     public void testGetBeginTime() {
         System.out.println("getBeginTime");
-        TimeSpan instance = null;
-        ITime expResult = null;
+        
+        TimeSpan instance = new TimeSpan(bt, et);
+        ITime expResult = bt;
         ITime result = instance.getBeginTime();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected begintime " + expResult + " is not equal to returned begintime " + result, expResult, result);
     }
 
     /**
@@ -57,12 +71,11 @@ public class TimeSpanTest {
     @Test
     public void testGetEndTime() {
         System.out.println("getEndTime");
-        TimeSpan instance = null;
-        ITime expResult = null;
+        
+        TimeSpan instance = new TimeSpan(bt, et);
+        ITime expResult = et;
         ITime result = instance.getEndTime();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected endtime " + expResult + " does not equal returned endtime " + result, expResult, result);
     }
 
     /**
@@ -71,12 +84,11 @@ public class TimeSpanTest {
     @Test
     public void testLength() {
         System.out.println("length");
-        TimeSpan instance = null;
-        int expResult = 0;
+        
+        TimeSpan instance = new TimeSpan(bt, et);
+        int expResult = new TimeSpan(bt, et).length();
         int result = instance.length();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected length " + expResult + " does not equal returned length " + result,expResult, result);
     }
 
     /**
@@ -85,11 +97,15 @@ public class TimeSpanTest {
     @Test
     public void testSetBeginTime() {
         System.out.println("setBeginTime");
-        ITime beginTime = null;
-        TimeSpan instance = null;
+        
+        ITime beginTime = correctBt;
+        TimeSpan instance = new TimeSpan(bt, et);
         instance.setBeginTime(beginTime);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected beginTime " + beginTime + " does not equal returned beginTime " + instance.getBeginTime(), beginTime, instance.getBeginTime());
+        
+        beginTime = incorrectBt;
+        instance.setBeginTime(beginTime);
+        assertEquals("expected beginTime " + bt + " does not equal returned beginTime " + instance.getBeginTime(), bt, instance.getBeginTime());
     }
 
     /**
@@ -98,11 +114,15 @@ public class TimeSpanTest {
     @Test
     public void testSetEndTime() {
         System.out.println("setEndTime");
-        ITime endTime = null;
-        TimeSpan instance = null;
+        
+        ITime endTime = correctEt;
+        TimeSpan instance = new TimeSpan(bt, et);
         instance.setEndTime(endTime);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected endTime " + endTime + " does not equal returned endTime " + instance.getEndTime(), endTime, instance.getEndTime());
+        
+        endTime = incorrectEt;
+        instance.setEndTime(endTime);
+        assertEquals("expected endTime " + et + " does not equal returned endTime " + instance.getEndTime(), et, instance.getEndTime());
     }
 
     /**
@@ -111,11 +131,12 @@ public class TimeSpanTest {
     @Test
     public void testMove() {
         System.out.println("move");
-        int minutes = 0;
-        TimeSpan instance = null;
+        
+        int minutes = 10;
+        TimeSpan instance = new TimeSpan(bt, et);
         instance.move(minutes);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected beginTime " + bt.plus(minutes) + " does not equal returned beginTime " + instance.getBeginTime(), bt.plus(minutes), instance.getBeginTime());
+        assertEquals("expected endTime " + et.plus(minutes) + " does not equal returned endTime " + instance.getEndTime(), et.plus(minutes), instance.getEndTime());
     }
 
     /**
@@ -124,11 +145,15 @@ public class TimeSpanTest {
     @Test
     public void testChangeLengthWith() {
         System.out.println("changeLengthWith");
-        int minutes = 0;
-        TimeSpan instance = null;
+        
+        int minutes = 10;
+        TimeSpan instance = new TimeSpan(bt, et);
         instance.changeLengthWith(minutes);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected endTime " + et.plus(minutes) + " does not equal returned endTime " + instance.getEndTime(), et.plus(minutes), instance.getEndTime());
+        
+        minutes = -10;
+        instance.changeLengthWith(minutes);
+        assertEquals("expected endTime " + et + " does noet equal returned endTime " + instance.getEndTime(), et, instance.getEndTime());
     }
 
     /**
@@ -137,13 +162,17 @@ public class TimeSpanTest {
     @Test
     public void testIsPartOf() {
         System.out.println("isPartOf");
-        ITimeSpan timeSpan = null;
-        TimeSpan instance = null;
+        
+        ITimeSpan timeSpan = new TimeSpan(inBt, inEt);
+        TimeSpan instance = new TimeSpan(bt, et);
         boolean expResult = false;
         boolean result = instance.isPartOf(timeSpan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected isPartOf " + expResult + " does not equal returned isPartOf " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(outBt, outEt);
+        expResult = true;
+        result = instance.isPartOf(timeSpan);
+        assertEquals("expected isPartOF " + expResult + " does not equal returned isPartOf " + result, expResult, result);
     }
 
     /**
@@ -152,13 +181,52 @@ public class TimeSpanTest {
     @Test
     public void testUnionWith() {
         System.out.println("unionWith");
-        ITimeSpan timeSpan = null;
-        TimeSpan instance = null;
-        ITimeSpan expResult = null;
+        
+        ITimeSpan timeSpan = new TimeSpan(inBt, inEt);
+        TimeSpan instance = new TimeSpan(bt, et);
+        ITimeSpan expResult = new TimeSpan(bt, et);
         ITimeSpan result = instance.unionWith(timeSpan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(inBt, et);
+        expResult = new TimeSpan(bt, et);
+        result = instance.unionWith(timeSpan);
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(inBt, outEt);
+        expResult = new TimeSpan(bt, outEt);
+        result = instance.unionWith(timeSpan);
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(bt, inBt);
+        expResult = new TimeSpan(bt, et);
+        result = instance.unionWith(timeSpan);
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(bt, et);
+        expResult = new TimeSpan(bt, et);
+        result = instance.unionWith(timeSpan);
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(bt, outEt);
+        expResult = new TimeSpan(bt, outEt);
+        result = instance.unionWith(timeSpan);
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(outBt, inEt);
+        expResult = new TimeSpan(outBt, et);
+        result = instance.unionWith(timeSpan);
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(outBt, et);
+        expResult = new TimeSpan(outBt, et);
+        result = instance.unionWith(timeSpan);
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(outBt, outEt);
+        expResult = new TimeSpan(outBt, outEt);
+        result = instance.unionWith(timeSpan);
+        assertEquals("expected union " + expResult + " does not equal returned union " + result, expResult, result);
     }
 
     /**
@@ -167,13 +235,52 @@ public class TimeSpanTest {
     @Test
     public void testIntersectionWith() {
         System.out.println("intersectionWith");
-        ITimeSpan timeSpan = null;
-        TimeSpan instance = null;
-        ITimeSpan expResult = null;
+        
+        ITimeSpan timeSpan = new TimeSpan(inBt, inEt);
+        TimeSpan instance = new TimeSpan(bt, et);
+        ITimeSpan expResult = new TimeSpan(inBt, inEt);
         ITimeSpan result = instance.intersectionWith(timeSpan);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
+
+        timeSpan = new TimeSpan(inBt, et);
+        expResult = new TimeSpan(inBt, et);
+        result = instance.intersectionWith(timeSpan);
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
+
+        timeSpan = new TimeSpan(inBt, outEt);
+        expResult = new TimeSpan(inBt, et);
+        result = instance.intersectionWith(timeSpan);
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(bt, inEt);
+        expResult = new TimeSpan(bt, inEt);
+        result = instance.intersectionWith(timeSpan);
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(bt, et);
+        expResult = new TimeSpan(bt, et);
+        result = instance.intersectionWith(timeSpan);
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(bt, outEt);
+        expResult = new TimeSpan(bt, et);
+        result = instance.intersectionWith(timeSpan);
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(outBt, inEt);
+        expResult = new TimeSpan(bt, inEt);
+        result = instance.intersectionWith(timeSpan);
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(outBt, et);
+        expResult = new TimeSpan(bt, et);
+        result = instance.intersectionWith(timeSpan);
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
+        
+        timeSpan = new TimeSpan(outBt, outEt);
+        expResult = new TimeSpan(bt, et);
+        result = instance.intersectionWith(timeSpan);
+        assertEquals("expected intersection " + expResult + " does not equal returned intersection " + result, expResult, result);
     }
     
 }

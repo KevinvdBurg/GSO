@@ -12,7 +12,6 @@ package fontys.time;
  * 
  */
 public class TimeSpan implements ITimeSpan {
-
     /* class invariant: 
      * A stretch of time with a begin time and end time.
      * The end time is always later then the begin time; the length of the time span is
