@@ -14,11 +14,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Kevin van der Burg
+ * @author kvdb
  */
-public class TimeTest {
+public class ITimeTest {
     
-    public TimeTest() {
+    public ITimeTest() {
     }
     
     @BeforeClass
@@ -38,26 +38,12 @@ public class TimeTest {
     }
 
     /**
-     * Test of getDayInWeek method, of class Time.
-     */
-    @Test
-    public void testGetDayInWeek() {
-        System.out.println("getDayInWeek");
-        Time instance = null;
-        DayInWeek expResult = null;
-        DayInWeek result = instance.getDayInWeek();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getYear method, of class Time.
+     * Test of getYear method, of class ITime.
      */
     @Test
     public void testGetYear() {
         System.out.println("getYear");
-        Time instance = null;
+        ITime instance = new ITimeImpl();
         int expResult = 0;
         int result = instance.getYear();
         assertEquals(expResult, result);
@@ -66,12 +52,12 @@ public class TimeTest {
     }
 
     /**
-     * Test of getMonth method, of class Time.
+     * Test of getMonth method, of class ITime.
      */
     @Test
     public void testGetMonth() {
         System.out.println("getMonth");
-        Time instance = null;
+        ITime instance = new ITimeImpl();
         int expResult = 0;
         int result = instance.getMonth();
         assertEquals(expResult, result);
@@ -80,12 +66,12 @@ public class TimeTest {
     }
 
     /**
-     * Test of getDay method, of class Time.
+     * Test of getDay method, of class ITime.
      */
     @Test
     public void testGetDay() {
         System.out.println("getDay");
-        Time instance = null;
+        ITime instance = new ITimeImpl();
         int expResult = 0;
         int result = instance.getDay();
         assertEquals(expResult, result);
@@ -94,12 +80,12 @@ public class TimeTest {
     }
 
     /**
-     * Test of getHours method, of class Time.
+     * Test of getHours method, of class ITime.
      */
     @Test
     public void testGetHours() {
         System.out.println("getHours");
-        Time instance = null;
+        ITime instance = new ITimeImpl();
         int expResult = 0;
         int result = instance.getHours();
         assertEquals(expResult, result);
@@ -108,12 +94,12 @@ public class TimeTest {
     }
 
     /**
-     * Test of getMinutes method, of class Time.
+     * Test of getMinutes method, of class ITime.
      */
     @Test
     public void testGetMinutes() {
         System.out.println("getMinutes");
-        Time instance = null;
+        ITime instance = new ITimeImpl();
         int expResult = 0;
         int result = instance.getMinutes();
         assertEquals(expResult, result);
@@ -122,13 +108,27 @@ public class TimeTest {
     }
 
     /**
-     * Test of plus method, of class Time.
+     * Test of getDayInWeek method, of class ITime.
+     */
+    @Test
+    public void testGetDayInWeek() {
+        System.out.println("getDayInWeek");
+        ITime instance = new ITimeImpl();
+        DayInWeek expResult = null;
+        DayInWeek result = instance.getDayInWeek();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of plus method, of class ITime.
      */
     @Test
     public void testPlus() {
         System.out.println("plus");
         int minutes = 0;
-        Time instance = null;
+        ITime instance = new ITimeImpl();
         ITime expResult = null;
         ITime result = instance.plus(minutes);
         assertEquals(expResult, result);
@@ -137,33 +137,53 @@ public class TimeTest {
     }
 
     /**
-     * Test of compareTo method, of class Time.
-     */
-    @Test
-    public void testCompareTo() {
-        System.out.println("compareTo");
-        ITime t = null;
-        Time instance = null;
-        int expResult = 0;
-        int result = instance.compareTo(t);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of difference method, of class Time.
+     * Test of difference method, of class ITime.
      */
     @Test
     public void testDifference() {
         System.out.println("difference");
         ITime time = null;
-        Time instance = null;
+        ITime instance = new ITimeImpl();
         int expResult = 0;
         int result = instance.difference(time);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    public class ITimeImpl implements ITime {
+
+        public int getYear() {
+            return 0;
+        }
+
+        public int getMonth() {
+            return 0;
+        }
+
+        public int getDay() {
+            return 0;
+        }
+
+        public int getHours() {
+            return 0;
+        }
+
+        public int getMinutes() {
+            return 0;
+        }
+
+        public DayInWeek getDayInWeek() {
+            return null;
+        }
+
+        public ITime plus(int minutes) {
+            return null;
+        }
+
+        public int difference(ITime time) {
+            return 0;
+        }
     }
     
 }
