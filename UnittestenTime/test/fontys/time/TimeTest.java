@@ -5,6 +5,7 @@
  */
 package fontys.time;
 
+import org.hamcrest.core.IsNull;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -49,8 +50,7 @@ public class TimeTest {
         System.out.println("getDayInWeek");
         DayInWeek expResult = DayInWeek.SAT;
         DayInWeek result = this.time.getDayInWeek();
-        assertEquals(expResult, result);
-        fail("31-10-1992 is op een Zaterdag");
+        assertEquals("31-10-1992 is op een Zaterdag",expResult, result);
     }
 
     /**
@@ -61,8 +61,7 @@ public class TimeTest {
         System.out.println("getYear");
         int expResult = 1992;
         int result = this.time.getYear();
-        assertEquals(expResult, result);
-        fail("31-10-1992 is in het Jaar 1992");
+        assertEquals("31-10-1992 is in het Jaar 1992",expResult, result);
     }
 
     /**
@@ -73,8 +72,7 @@ public class TimeTest {
         System.out.println("getMonth");
         int expResult = 10;
         int result = this.time.getMonth();
-        assertEquals(expResult, result);
-        fail("31-10-1992 is in de 10de maand van het Jaar Oktober");
+        assertEquals("31-10-1992 is in de 10de maand van het Jaar Oktober", expResult, result);
     }
 
     /**
@@ -83,12 +81,9 @@ public class TimeTest {
     @Test
     public void testGetDay() {
         System.out.println("getDay");
-        Time instance = null;
-        int expResult = 0;
-        int result = instance.getDay();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = 31;
+        int result = this.time.getDay();
+        assertEquals("31-10-1992 is op 31ste", expResult, result);
     }
 
     /**
@@ -97,12 +92,9 @@ public class TimeTest {
     @Test
     public void testGetHours() {
         System.out.println("getHours");
-        Time instance = null;
-        int expResult = 0;
-        int result = instance.getHours();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = 11;
+        int result = this.time.getHours();
+        assertEquals("Tijd op dat moment moet 11 uur bedragen", expResult, result);
     }
 
     /**
@@ -111,12 +103,9 @@ public class TimeTest {
     @Test
     public void testGetMinutes() {
         System.out.println("getMinutes");
-        Time instance = null;
-        int expResult = 0;
-        int result = instance.getMinutes();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = 42;
+        int result = this.time.getMinutes();
+        assertEquals("huidige tijd moet 42 bedragen",expResult, result);
     }
 
     /**
@@ -125,13 +114,15 @@ public class TimeTest {
     @Test
     public void testPlus() {
         System.out.println("plus");
-        int minutes = 0;
-        Time instance = null;
-        ITime expResult = null;
-        ITime result = instance.plus(minutes);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int minutes = 22;
+        Time expResult = new Time(1992, 10, 31, 12, 4);
+        ITime result = this.time.plus(minutes);
+        
+        assertEquals("Uur moet nu 12 zijn", expResult.getHours(), result.getHours());
+        assertEquals("Minuten moeten nu 4 zijn", expResult.getMinutes(), result.getMinutes());
+        assertEquals("Dag mag niet verandert zijn", expResult.getDay(), result.getDay());
+        assertEquals("Maand mag niet verandert zijn", expResult.getMonth(), result.getMonth());
+        assertEquals("Jaar mag niet verandert zijn", expResult.getYear(), result.getYear());
     }
 
     /**
@@ -140,13 +131,10 @@ public class TimeTest {
     @Test
     public void testCompareTo() {
         System.out.println("compareTo");
-        ITime t = null;
-        Time instance = null;
-        int expResult = 0;
-        int result = instance.compareTo(t);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("time == time | Time is hetzelfde", 0, time.compareTo(time));
+       assertEquals("time != time | Time is niet hetzelfde", 1, time.compareTo(time.plus(5)));
+       assertEquals("time == time | Time is hetzelfde", 0, time.plus(5).compareTo(time.plus(5)));
+       
     }
 
     /**
@@ -155,13 +143,15 @@ public class TimeTest {
     @Test
     public void testDifference() {
         System.out.println("difference");
-        ITime time = null;
-        Time instance = null;
-        int expResult = 0;
-        int result = instance.difference(time);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Time instance = (Time) time.plus(1000);
+        int expResult = -1000;
+        int result = time.difference(instance);
+        assertEquals("Resultaat moet in de min zijn", expResult, result);
+
+        instance = (Time) time.plus(-1000);
+        expResult = 1000;
+        result = time.difference(instance);
+        assertEquals("Resultaat moet in de plus zijn", expResult, result);
     }
     
 }
