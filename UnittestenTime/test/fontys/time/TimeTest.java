@@ -17,10 +17,13 @@ import static org.junit.Assert.*;
  * @author Kevin van der Burg
  */
 public class TimeTest {
-    
-    public TimeTest() {
-    }
-    
+    private Time time;
+    private final int year = 1992;
+    private final int month = 10;
+    private final int day = 31;
+    private final int hours = 11;
+    private final int minutes = 42;
+
     @BeforeClass
     public static void setUpClass() {
     }
@@ -31,6 +34,7 @@ public class TimeTest {
     
     @Before
     public void setUp() {
+        time = new Time(year, month, day, hours, minutes);
     }
     
     @After
@@ -43,12 +47,10 @@ public class TimeTest {
     @Test
     public void testGetDayInWeek() {
         System.out.println("getDayInWeek");
-        Time instance = null;
-        DayInWeek expResult = null;
-        DayInWeek result = instance.getDayInWeek();
+        DayInWeek expResult = DayInWeek.SAT;
+        DayInWeek result = this.time.getDayInWeek();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("31-10-1992 is op een Zaterdag");
     }
 
     /**
@@ -57,12 +59,10 @@ public class TimeTest {
     @Test
     public void testGetYear() {
         System.out.println("getYear");
-        Time instance = null;
-        int expResult = 0;
-        int result = instance.getYear();
+        int expResult = 1992;
+        int result = this.time.getYear();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("31-10-1992 is in het Jaar 1992");
     }
 
     /**
@@ -71,12 +71,10 @@ public class TimeTest {
     @Test
     public void testGetMonth() {
         System.out.println("getMonth");
-        Time instance = null;
-        int expResult = 0;
-        int result = instance.getMonth();
+        int expResult = 10;
+        int result = this.time.getMonth();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("31-10-1992 is in de 10de maand van het Jaar Oktober");
     }
 
     /**
