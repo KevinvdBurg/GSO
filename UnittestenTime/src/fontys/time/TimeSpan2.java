@@ -1,64 +1,138 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fontys.time;
 
 /**
  *
  * @author Kevin van der Burg
+ * 
+ * LET OP: De klasse TimeSpan bevat enkele fouten.
+ * 
  */
-public class TimeSpan2 implements ITimeSpan{
+public class TimeSpan2 implements ITimeSpan {
+    /* class invariant: 
+     * A stretch of time with a begin time and end time.
+     * The end time is always later then the begin time; the length of the time span is
+     * always positive
+     * 
+     */
+    private ITime bt, et;
+    
+    /**
+     * 
+     * @param bt must be earlier than et
+     * @param et 
+     */
+    public TimeSpan2(ITime bt, long duration) {
+        ITime et = bt.plus(Integer.valueOf(String.valueOf(duration)));
+        //ITime et = bt.plus(duration.intValue());
+        
+        if (bt.compareTo(et) <= 0) {
+            throw new IllegalArgumentException("begin time " + bt + " must be earlier than end time " + et);
+        }
+
+        this.bt = bt;
+        this.et = et;
+    }
 
     @Override
     public ITime getBeginTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return bt;
     }
 
     @Override
     public ITime getEndTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return et;
     }
 
     @Override
     public int length() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return et.difference(bt);
     }
 
     @Override
     public void setBeginTime(ITime beginTime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (beginTime.compareTo(et) >= 0) {
+            throw new IllegalArgumentException("begin time "
+                    + bt + " must be earlier than end time " + et);
+        }
+
+        bt = beginTime;
     }
 
     @Override
     public void setEndTime(ITime endTime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (endTime.compareTo(bt) <= 0) {
+            throw new IllegalArgumentException("end time "
+                    + et + " must be later then begin time " + bt);
+        }
+
+        bt = endTime;
     }
 
     @Override
     public void move(int minutes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bt = bt.plus(minutes);
+        et = bt.plus(minutes);
     }
 
     @Override
     public void changeLengthWith(int minutes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (minutes <= 0) {
+            throw new IllegalArgumentException("length of period must be positive");
+        }
+        
+        et = et.plus(minutes);
     }
 
     @Override
     public boolean isPartOf(ITimeSpan timeSpan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (getBeginTime().compareTo(timeSpan.getBeginTime()) >= 0
+                && getEndTime().compareTo(timeSpan.getEndTime()) <= 0);
     }
 
     @Override
     public ITimeSpan unionWith(ITimeSpan timeSpan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (bt.compareTo(timeSpan.getEndTime()) < 0 || et.compareTo(timeSpan.getBeginTime()) > 0) {
+            return null;
+        }
+        
+        ITime begintime, endtime;
+        if (bt.compareTo(timeSpan.getBeginTime()) < 0) {
+            begintime = bt;
+        } else {
+            begintime = timeSpan.getBeginTime();
+        }
+
+        if (et.compareTo(timeSpan.getEndTime()) > 0) {
+            endtime = et;
+        } else {
+            endtime = timeSpan.getEndTime();
+        }
+
+        return new TimeSpan2(begintime, endtime.difference(begintime));
+
     }
 
     @Override
     public ITimeSpan intersectionWith(ITimeSpan timeSpan) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        ITime begintime, endtime;
+        if (bt.compareTo(timeSpan.getBeginTime()) > 0) {
+            begintime = bt;
+        } else {
+            begintime = timeSpan.getBeginTime();
+        }
+
+        if (et.compareTo(timeSpan.getEndTime()) < 0) {
+            endtime = et;
+        } else {
+            endtime = timeSpan.getEndTime();
+        }
+
+        if (begintime.compareTo(endtime) <= 0) {
+            return null;
+        }
+
+        return new TimeSpan2(begintime, endtime.difference(begintime));
     }
-    
 }
