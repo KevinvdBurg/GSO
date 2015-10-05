@@ -4,8 +4,6 @@
  */
 package fontys.time;
 
-import java.util.Objects;
-
 /**
  *
  * @author Frank Peeters, Nico Kuijpers
@@ -157,10 +155,8 @@ public class TimeSpan implements ITimeSpan {
             if(this.getClass() == object.getClass()){
                 ITimeSpan timeSpan = (ITimeSpan)object;
             
-                if(this.bt.toString().equals(timeSpan.getBeginTime().toString())){
-                    if(this.et.toString().equals(timeSpan.getEndTime().toString())){
-                     result = true;   
-                    }
+                if(this.bt.toString().equals(timeSpan.getBeginTime().toString()) && this.et.toString().equals(timeSpan.getEndTime().toString())){
+                    result = true;   
                 } else{
                     System.out.print("\n");
                     System.out.print("--------------------------------");
