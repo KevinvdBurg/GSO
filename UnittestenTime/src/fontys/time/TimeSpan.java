@@ -4,6 +4,8 @@
  */
 package fontys.time;
 
+import java.util.Objects;
+
 /**
  *
  * @author Frank Peeters, Nico Kuijpers
@@ -52,7 +54,7 @@ public class TimeSpan implements ITimeSpan {
 
     @Override
     public void setBeginTime(ITime beginTime) {
-        if (beginTime.compareTo(et) >= 0) {
+        if (beginTime.compareTo(et) <= 0) {
             throw new IllegalArgumentException("begin time "
                     + bt + " must be earlier than end time " + et);
         }
@@ -62,18 +64,18 @@ public class TimeSpan implements ITimeSpan {
 
     @Override
     public void setEndTime(ITime endTime) {
-        if (endTime.compareTo(bt) <= 0) {
+        if (endTime.compareTo(bt) >= 0) {
             throw new IllegalArgumentException("end time "
                     + et + " must be later then begin time " + bt);
         }
 
-        bt = endTime;
+        et = endTime;
     }
 
     @Override
     public void move(int minutes) {
         bt = bt.plus(minutes);
-        et = bt.plus(minutes);
+        et = et.plus(minutes);
     }
 
     @Override
@@ -111,29 +113,69 @@ public class TimeSpan implements ITimeSpan {
         }
 
         return new TimeSpan(begintime, endtime);
-
     }
 
     @Override
     public ITimeSpan intersectionWith(ITimeSpan timeSpan) {
 
         ITime begintime, endtime;
-        if (bt.compareTo(timeSpan.getBeginTime()) > 0) {
+        if (bt.compareTo(timeSpan.getBeginTime()) < 0) {
             begintime = bt;
         } else {
             begintime = timeSpan.getBeginTime();
         }
 
-        if (et.compareTo(timeSpan.getEndTime()) < 0) {
+        if (et.compareTo(timeSpan.getEndTime()) > 0) {
             endtime = et;
         } else {
             endtime = timeSpan.getEndTime();
         }
 
-        if (begintime.compareTo(endtime) >= 0) {
+        if (begintime.compareTo(endtime) <= 0) {
             return null;
         }
 
         return new TimeSpan(begintime, endtime);
+    }
+    
+    @Override
+    public String toString()
+    {
+        return "FROM " + bt.toString() + " TO " + et.toString();
+    }
+    
+    /**
+     *
+     * @param object
+     * @return
+     */
+    @Override
+    public boolean equals(Object object){ 
+        boolean result = false;
+        
+        if(object != null){
+            if(this.getClass() == object.getClass()){
+                ITimeSpan timeSpan = (ITimeSpan)object;
+            
+                if(this.bt.toString().equals(timeSpan.getBeginTime().toString())){
+                    
+                    if(this.et.toString().equals(timeSpan.getEndTime().toString())){
+                     result = true;   
+                    }
+                } else{
+                    System.out.print("\n");
+                    System.out.print("--------------------------------");
+                    System.out.print("\n");
+                    System.out.print(this.bt + "\n" + timeSpan.getBeginTime());
+                    System.out.print("\n");
+                    System.out.print(this.et + "\n" + timeSpan.getEndTime());
+                    System.out.print("\n");
+                    System.out.print("--------------------------------");
+                    System.out.print("\n");
+                }   
+            }
+        }
+        
+        return result;
     }
 }

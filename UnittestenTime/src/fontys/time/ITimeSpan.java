@@ -84,4 +84,15 @@ public interface ITimeSpan {
      * be returned
      */
     ITimeSpan intersectionWith(ITimeSpan timeSpan);
+    
+    @Override
+    String toString();
+    
+    /**
+     *
+     * @param object
+     * @return
+     */
+    @Override
+    boolean equals(Object object);
 }
