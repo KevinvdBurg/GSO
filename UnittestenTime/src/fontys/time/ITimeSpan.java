@@ -87,4 +87,12 @@ public interface ITimeSpan {
     
     @Override
     String toString();
+    
+    /**
+     *
+     * @param object
+     * @return
+     */
+    @Override
+    boolean equals(Object object);
 }
