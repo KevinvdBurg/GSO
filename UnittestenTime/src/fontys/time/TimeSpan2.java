@@ -135,4 +135,38 @@ public class TimeSpan2 implements ITimeSpan {
 
         return new TimeSpan2(begintime, endtime.difference(begintime));
     }
+    
+    /**
+     *
+     * @param object
+     * @return
+     */
+    @Override
+    public boolean equals(Object object){ 
+        boolean result = false;
+        
+        if(object != null){
+            if(this.getClass() == object.getClass()){
+                ITimeSpan timeSpan = (ITimeSpan)object;
+            
+                if(this.bt.toString().equals(timeSpan.getBeginTime().toString())){
+                    if(this.et.toString().equals(timeSpan.getEndTime().toString())){
+                     result = true;   
+                    }
+                } else{
+                    System.out.print("\n");
+                    System.out.print("--------------------------------");
+                    System.out.print("\n");
+                    System.out.print(this.bt + "\n" + timeSpan.getBeginTime());
+                    System.out.print("\n");
+                    System.out.print(this.et + "\n" + timeSpan.getEndTime());
+                    System.out.print("\n");
+                    System.out.print("--------------------------------");
+                    System.out.print("\n");
+                }   
+            }
+        }
+        
+        return result;
+    }
 }
