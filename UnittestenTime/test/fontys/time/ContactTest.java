@@ -115,6 +115,8 @@ public class ContactTest {
         contactMilton.removeAppointment(ac);
         contactMilton.removeAppointment(ab);
         
+        Iterator<Appointment> appointmentsMilton = contactMilton.appointments();
+        assertNotNull("Afspraken Milton zijn niet NULL", appointmentsMilton);
         
     }
 
@@ -126,9 +128,10 @@ public class ContactTest {
         Appointment aa = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 0, 0), 90)); //wel
         Appointment ab = new Appointment("Afspraak 2", new TimeSpan2(new Time(2015, 11, 5, 1, 1), 60)); //wel
         Appointment ac = new Appointment("Afspraak 3", new TimeSpan2(new Time(2015, 12, 5, 3, 2), 15)); //wel
-        Appointment ba = new Appointment("Afspraak 1", new TimeSpan2(new Time(2016, 10, 5, 0, 0), 90)); //wel
-        Appointment bb = new Appointment("Afspraak 2", new TimeSpan2(new Time(2017, 11, 5, 1, 1), 60)); //wel
-        Appointment bc = new Appointment("Afspraak 3", new TimeSpan2(new Time(2018, 12, 5, 3, 2), 15)); //wel
+        Appointment ba = new Appointment("Afspraak 4", new TimeSpan2(new Time(2016, 10, 5, 0, 0), 90)); //wel
+        Appointment bb = new Appointment("Afspraak 5", new TimeSpan2(new Time(2017, 11, 5, 1, 1), 60)); //wel
+        Appointment bc = new Appointment("Afspraak 6", new TimeSpan2(new Time(2018, 12, 5, 3, 2), 15)); //wel
+        
         contactMilton.addAppointment(aa);
         contactMilton.addAppointment(ab);
         contactMilton.addAppointment(ac);
@@ -136,6 +139,11 @@ public class ContactTest {
         contactKevin.addAppointment(bb);
         contactKevin.addAppointment(bc);
         
+        Iterator<Appointment> appointmentsKevin = contactKevin.appointments();
+        assertNotNull("Afspraken Kevin zijn niet NULL", appointmentsKevin);
+        
+         Iterator<Appointment> appointmentsMilton= contactMilton.appointments();
+        assertNotNull("Afspraken Milton zijn niet NULL", appointmentsKevin);
     }
     
 }
