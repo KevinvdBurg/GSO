@@ -19,8 +19,8 @@ public class TimeSpan2 implements ITimeSpan {
     
     /**
      * 
-     * @param bt must be earlier than et
-     * @param et 
+     * @param bt must be earlier than et 
+     * @param duration 
      */
     public TimeSpan2(ITime bt, long duration) {
         ITime et = bt.plus(Integer.valueOf(String.valueOf(duration)));

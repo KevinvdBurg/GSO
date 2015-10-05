@@ -5,10 +5,41 @@
  */
 package fontys.time;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author kvdb
  */
 class Appointment {
+    private String subject;
+    private ITimeSpan timeSpan;
+    private ArrayList<Contact> contacts;
     
+    public Appointment(String subject, ITimeSpan timeSpan){
+        
+    }
+    
+    public String getSubject(){
+        return null;
+    }
+
+    public ITimeSpan getTimeSpan(){
+        return null;
+        
+    }
+
+    public ArrayList<Contact> invitees(){
+        return null;
+        
+    }
+    
+    public boolean addContact(Contact contact){
+        return false;
+        
+    }
+    
+    public void removeContact(Contact contact){
+        
+    }
 }
