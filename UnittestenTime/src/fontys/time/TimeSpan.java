@@ -158,7 +158,6 @@ public class TimeSpan implements ITimeSpan {
                 ITimeSpan timeSpan = (ITimeSpan)object;
             
                 if(this.bt.toString().equals(timeSpan.getBeginTime().toString())){
-                    
                     if(this.et.toString().equals(timeSpan.getEndTime().toString())){
                      result = true;   
                     }
