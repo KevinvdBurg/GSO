@@ -39,7 +39,8 @@ class Appointment {
         
     }
     
-    public void removeContact(Contact contact){
+    public boolean removeContact(Contact contact){
+        return false;
         
     }
 }
