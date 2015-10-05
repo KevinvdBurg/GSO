@@ -5,8 +5,11 @@
  */
 package fontys.time;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,7 +35,16 @@ public class Contact {
     * @author
     */
     public Contact(String name){
+        if(name.isEmpty() || name == null){
+            try {
+                throw new Exception("name cant be empty or null");
+            } catch (Exception ex) {
+                Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
+        this.name = name;
+        this.appointments = new ArrayList<Appointment>();
     }
     
     
@@ -52,7 +64,35 @@ public class Contact {
     * @author
     */
     boolean addAppointment(Appointment a){
-        return false;
+        for(Appointment appointment : appointments){
+            if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) >= 0){
+                try {
+                    throw new Exception("appointment cant take place during another appointment");
+                } catch (Exception ex) {
+                    Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if(a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) <= 0){
+                try {
+                    throw new Exception("appointment cant take place during another appointment");
+                } catch (Exception ex) {
+                    Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if(a.getTimeSpan().getBeginTime().compareTo(a.getTimeSpan().getEndTime()) >= 0){
+                try {
+                    throw new Exception("begintime must be after endtime");
+                } catch (Exception ex) {
+                    Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+        this.appointments.add(a);
+        
+        return true;
     }
     
     /**
@@ -61,8 +101,15 @@ public class Contact {
     * @return true or false if the method fails or succeeds to add a Appointment 
     * @author
     */
-    void removeAppointment(Appointment a){
+    boolean removeAppointment(Appointment a){
+        boolean result = false;
         
+        if(this.appointments.contains(a)){
+            this.appointments.remove(a);
+            result = true;
+        }
+        
+        return result;
     }
     
     /**
