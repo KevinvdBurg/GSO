@@ -5,7 +5,6 @@
  */
 package fontys.time;
 
-import org.hamcrest.core.IsNull;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,6 +41,38 @@ public class TimeTest {
     public void tearDown() {
     }
 
+    @Test
+    (expected=IllegalArgumentException.class)
+    public void timeExceptionM()
+    {        
+        Time time = new Time(20, 0, 20, 12, 12);
+        time = new Time(20, 13, 20, 12, 12);
+    }
+    
+    @Test
+    (expected=IllegalArgumentException.class)
+    public void timeExceptionD()
+    {
+        Time time = new Time(20, 1, 0, 12, 12);
+        time = new Time(20, 1, 32, 12, 12);
+    }
+    
+    @Test
+    (expected = IllegalArgumentException.class)
+    public void timeExceptionH()
+    {
+        Time time = new Time(20, 1, 1, -1, 12);
+        time =  new Time(20, 1, 1, 24, 12);
+    }
+    
+    @Test
+    (expected = IllegalArgumentException.class)
+    public void timeExceptionMin()
+    {
+        Time time = new Time(20, 1, 1, 1, -1);
+        time = new Time(20, 1, 1, 1, 60);
+    }
+    
     /**
      * Test of getDayInWeek method, of class Time.
      */

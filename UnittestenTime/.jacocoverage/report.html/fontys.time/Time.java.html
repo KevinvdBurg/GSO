@@ -28,17 +28,17 @@ public class Time implements ITime {
      * @param min 0≤m≤59
      */
 <span class="fc" id="L30">    public Time(int y, int m, int d, int h, int min) {</span>
-<span class="pc bpc" id="L31" title="2 of 4 branches missed.">        if (m &lt; 1 || m &gt; 12) {</span>
-<span class="nc" id="L32">            throw new IllegalArgumentException(&quot;month must be within 1..12&quot;);</span>
+<span class="pc bpc" id="L31" title="1 of 4 branches missed.">        if (m &lt; 1 || m &gt; 12) {</span>
+<span class="fc" id="L32">            throw new IllegalArgumentException(&quot;month must be within 1..12&quot;);</span>
         }
-<span class="pc bpc" id="L34" title="2 of 4 branches missed.">        if (d &lt; 1 || d &gt; 31) {</span>
-<span class="nc" id="L35">            throw new IllegalArgumentException(&quot;day must be within 1..31&quot;);</span>
+<span class="pc bpc" id="L34" title="1 of 4 branches missed.">        if (d &lt; 1 || d &gt; 31) {</span>
+<span class="fc" id="L35">            throw new IllegalArgumentException(&quot;day must be within 1..31&quot;);</span>
         }
-<span class="pc bpc" id="L37" title="2 of 4 branches missed.">        if (h &lt; 0 || h &gt; 23) {</span>
-<span class="nc" id="L38">            throw new IllegalArgumentException(&quot;hours must be within 0..23&quot;);</span>
+<span class="pc bpc" id="L37" title="1 of 4 branches missed.">        if (h &lt; 0 || h &gt; 23) {</span>
+<span class="fc" id="L38">            throw new IllegalArgumentException(&quot;hours must be within 0..23&quot;);</span>
         }
-<span class="pc bpc" id="L40" title="2 of 4 branches missed.">        if (m &lt; 0 || m &gt; 59) {</span>
-<span class="nc" id="L41">            throw new IllegalArgumentException(&quot;minutes must be within 0..59&quot;);</span>
+<span class="pc bpc" id="L40" title="1 of 4 branches missed.">        if (min &lt; 0 || min &gt; 59) {</span>
+<span class="fc" id="L41">            throw new IllegalArgumentException(&quot;minutes must be within 0..59&quot;);</span>
         }
         
 <span class="fc" id="L44">        gc = new GregorianCalendar(y, m-1 , d, h, min);</span>
@@ -98,6 +98,12 @@ public class Time implements ITime {
     public int difference(ITime time) {
 <span class="fc" id="L99">        Time t = (Time) time;</span>
 <span class="fc" id="L100">        return (int) ((this.gc.getTimeInMillis() - t.gc.getTimeInMillis()) / 60000);</span>
+    }
+    
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L106">        return getYear() + &quot; - &quot; + getMonth() + &quot; - &quot; + getDay() + &quot; &quot; + getHours() + &quot;:&quot; + getMinutes();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -5,11 +5,117 @@
  */
 package fontys.time;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author kvdb
+ * @author Milton van de Sanden
  */
-<span class="nc" id="L12">class Appointment {</span>
+class Appointment {
+    /**
+    * the subject of the appointment
+    */
+    private String subject;
     
+    /**
+    *the timespan in which the appointment takes place
+    */
+    private ITimeSpan timeSpan;
+    
+    /**
+    *a list of all contacts who have been invited to the appointment
+    */
+    private ArrayList&lt;Contact&gt; contacts;
+    
+    /**
+    * Creates a new appointment. it needs to initialize the subject and timespan of the appointment
+    *
+    * @param subject of the appointment, it cant be empty or null
+    * @param timeSpan in which the appointment takes place, it cant be null
+    */
+<span class="fc" id="L36">    public Appointment(String subject, ITimeSpan timeSpan) throws Exception{</span>
+<span class="pc bpc" id="L37" title="1 of 4 branches missed.">        if (!subject.isEmpty() || timeSpan != null)</span>
+        {
+<span class="fc" id="L39">            this.subject = subject;</span>
+<span class="fc" id="L40">            this.timeSpan = timeSpan;</span>
+<span class="fc" id="L41">            this.contacts = new ArrayList&lt;&gt;();</span>
+        }
+        else{
+<span class="fc" id="L44">            throw new Exception(&quot;Subject or timespan cant be empty or null&quot;);</span>
+        }
+<span class="fc" id="L46">    }</span>
+    
+    /**
+     * Returnes the subject of the appointment
+     * 
+     * @return subject
+     */
+    public String getSubject(){
+<span class="fc" id="L54">        return subject;</span>
+    }
+
+    /**
+     * returns the timespan in which the appointment takes place
+     * 
+     * @return timeSpan
+     */
+    public ITimeSpan getTimeSpan(){
+<span class="fc" id="L63">        return timeSpan;</span>
+        
+    }
+    
+    /**
+     * returns the list of contacts who have been invited to the appointment
+     * 
+     * @return contacts
+     */
+    public ArrayList&lt;Contact&gt; invitees(){
+<span class="fc" id="L73">        return contacts;</span>
+        
+    }
+    
+    /**
+     * Adds a new contact to the list of contacts who have been invited to the appointment
+     * 
+     * @param contact who has been invited to the appointment, cant be null or already a contact of the appointment
+     * @return true when the contact has been succesfully added, false when the the contact has been unsuccesfully added
+     */
+    public boolean addContact(Contact contact){
+        
+<span class="fc" id="L85">        boolean result = false;</span>
+        
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (contact != null) </span>
+        {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            if(!contacts.contains(contact))</span>
+            {
+<span class="fc" id="L91">                this.contacts.add(contact);</span>
+<span class="fc" id="L92">                result = true;</span>
+            } 
+        }
+                
+<span class="fc" id="L96">        return result;</span>
+        
+    }
+    
+    /**
+     * Removes a contact who is already in the list of contacts from the list of contacts
+     * 
+     * @param contact who is to be removed from the list of contacts, cant be null and must be already contained within the list of contacts
+     * @return true when the contact has been succesfully renoved, false when the contact has been unsuccesfully removed
+     */
+    public boolean removeContact(Contact contact){
+<span class="fc" id="L107">       boolean result = false;</span>
+        
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (contact != null) </span>
+        {
+<span class="fc bfc" id="L111" title="All 2 branches covered.">            if(contacts.contains(contact))</span>
+            {
+<span class="fc" id="L113">                this.contacts.remove(contact);</span>
+<span class="fc" id="L114">                result = true;</span>
+            } 
+        }
+                
+<span class="fc" id="L118">        return result;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -26,8 +26,8 @@ public class TimeSpan implements ITimeSpan {
      * @param et 
      */
 <span class="fc" id="L28">    public TimeSpan(ITime bt, ITime et) {</span>
-<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if (bt.compareTo(et) &lt;= 0) {</span>
-<span class="nc" id="L30">            throw new IllegalArgumentException(&quot;begin time &quot;</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (bt.compareTo(et) &lt;= 0) {</span>
+<span class="fc" id="L30">            throw new IllegalArgumentException(&quot;begin time &quot;</span>
                     + bt + &quot; must be earlier than end time &quot; + et);
         }
 
@@ -52,34 +52,34 @@ public class TimeSpan implements ITimeSpan {
 
     @Override
     public void setBeginTime(ITime beginTime) {
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if (beginTime.compareTo(et) &gt;= 0) {</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (beginTime.compareTo(et) &lt;= 0) {</span>
 <span class="fc" id="L56">            throw new IllegalArgumentException(&quot;begin time &quot;</span>
                     + bt + &quot; must be earlier than end time &quot; + et);
         }
 
-<span class="nc" id="L60">        bt = beginTime;</span>
-<span class="nc" id="L61">    }</span>
+<span class="fc" id="L60">        bt = beginTime;</span>
+<span class="fc" id="L61">    }</span>
 
     @Override
     public void setEndTime(ITime endTime) {
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (endTime.compareTo(bt) &lt;= 0) {</span>
-<span class="fc" id="L66">            throw new IllegalArgumentException(&quot;end time &quot;</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (endTime.compareTo(bt) &gt;= 0) {</span>
+<span class="nc" id="L66">            throw new IllegalArgumentException(&quot;end time &quot;</span>
                     + et + &quot; must be later then begin time &quot; + bt);
         }
 
-<span class="nc" id="L70">        bt = endTime;</span>
-<span class="nc" id="L71">    }</span>
+<span class="fc" id="L70">        et = endTime;</span>
+<span class="fc" id="L71">    }</span>
 
     @Override
     public void move(int minutes) {
 <span class="fc" id="L75">        bt = bt.plus(minutes);</span>
-<span class="fc" id="L76">        et = bt.plus(minutes);</span>
+<span class="fc" id="L76">        et = et.plus(minutes);</span>
 <span class="fc" id="L77">    }</span>
 
     @Override
     public void changeLengthWith(int minutes) {
-<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (minutes &lt;= 0) {</span>
-<span class="nc" id="L82">            throw new IllegalArgumentException(&quot;length of period must be positive&quot;);</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (minutes &lt;= 0) {</span>
+<span class="fc" id="L82">            throw new IllegalArgumentException(&quot;length of period must be positive&quot;);</span>
         }
         
 <span class="fc" id="L85">        et = et.plus(minutes);</span>
@@ -93,48 +93,84 @@ public class TimeSpan implements ITimeSpan {
 
     @Override
     public ITimeSpan unionWith(ITimeSpan timeSpan) {
-<span class="pc bpc" id="L96" title="2 of 4 branches missed.">        if (bt.compareTo(timeSpan.getEndTime()) &lt; 0 || et.compareTo(timeSpan.getBeginTime()) &gt; 0) {</span>
+<span class="pc bpc" id="L96" title="3 of 4 branches missed.">        if (bt.compareTo(timeSpan.getBeginTime()) &lt; 0 &amp;&amp; et.compareTo(timeSpan.getBeginTime()) &lt; 0) {</span>
 <span class="nc" id="L97">            return null;</span>
         }
+
+<span class="pc bpc" id="L100" title="1 of 4 branches missed.">        if (bt.compareTo(timeSpan.getEndTime()) &gt; 0 &amp;&amp; et.compareTo(timeSpan.getEndTime()) &gt; 0) {</span>
+<span class="fc" id="L101">            System.out.print(bt);</span>
+<span class="fc" id="L102">            System.out.print(et);</span>
+<span class="fc" id="L103">            System.out.print(timeSpan.getBeginTime());</span>
+<span class="fc" id="L104">            System.out.print(timeSpan.getEndTime());</span>
+<span class="fc" id="L105">            return null;</span>
+        }
+
         
         ITime begintime, endtime;
-<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (bt.compareTo(timeSpan.getBeginTime()) &gt; 0) {</span>
-<span class="fc" id="L102">            begintime = bt;</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if (bt.compareTo(timeSpan.getBeginTime()) &gt; 0) {</span>
+<span class="fc" id="L111">            begintime = bt;</span>
         } else {
-<span class="nc" id="L104">            begintime = timeSpan.getBeginTime();</span>
+<span class="nc" id="L113">            begintime = timeSpan.getBeginTime();</span>
         }
 
-<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        if (et.compareTo(timeSpan.getEndTime()) &lt; 0) {</span>
-<span class="fc" id="L108">            endtime = et;</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        if (et.compareTo(timeSpan.getEndTime()) &lt; 0) {</span>
+<span class="fc" id="L117">            endtime = et;</span>
         } else {
-<span class="nc" id="L110">            endtime = timeSpan.getEndTime();</span>
+<span class="fc" id="L119">            endtime = timeSpan.getEndTime();</span>
         }
 
-<span class="fc" id="L113">        return new TimeSpan(begintime, endtime);</span>
-
+<span class="fc" id="L122">        return new TimeSpan(begintime, endtime);</span>
     }
 
     @Override
     public ITimeSpan intersectionWith(ITimeSpan timeSpan) {
 
         ITime begintime, endtime;
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        if (bt.compareTo(timeSpan.getBeginTime()) &gt; 0) {</span>
-<span class="fc" id="L122">            begintime = bt;</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (bt.compareTo(timeSpan.getBeginTime()) &lt; 0) {</span>
+<span class="fc" id="L130">            begintime = bt;</span>
         } else {
-<span class="nc" id="L124">            begintime = timeSpan.getBeginTime();</span>
+<span class="fc" id="L132">            begintime = timeSpan.getBeginTime();</span>
         }
 
-<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if (et.compareTo(timeSpan.getEndTime()) &lt; 0) {</span>
-<span class="fc" id="L128">            endtime = et;</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        if (et.compareTo(timeSpan.getEndTime()) &gt; 0) {</span>
+<span class="fc" id="L136">            endtime = et;</span>
         } else {
-<span class="nc" id="L130">            endtime = timeSpan.getEndTime();</span>
+<span class="fc" id="L138">            endtime = timeSpan.getEndTime();</span>
         }
 
-<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        if (begintime.compareTo(endtime) &gt;= 0) {</span>
-<span class="fc" id="L134">            return null;</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">        if (begintime.compareTo(endtime) &lt;= 0) {</span>
+<span class="nc" id="L142">            return null;</span>
         }
 
-<span class="nc" id="L137">        return new TimeSpan(begintime, endtime);</span>
+<span class="fc" id="L145">        return new TimeSpan(begintime, endtime);</span>
+    }
+    
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L151">        return &quot;FROM &quot; + bt.toString() + &quot; TO &quot; + et.toString();</span>
+    }
+    
+    /**
+     *
+     * @param object
+     * @return
+     */
+    @Override
+    public boolean equals(Object object){ 
+<span class="fc" id="L161">        boolean result = false;</span>
+        
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        if(object != null){</span>
+<span class="pc bpc" id="L164" title="1 of 2 branches missed.">            if(this.getClass() == object.getClass()){</span>
+<span class="fc" id="L165">                ITimeSpan timeSpan = (ITimeSpan)object;</span>
+            
+<span class="pc bpc" id="L167" title="2 of 4 branches missed.">                if(this.bt.toString().equals(timeSpan.getBeginTime().toString()) &amp;&amp; this.et.toString().equals(timeSpan.getEndTime().toString())){</span>
+<span class="fc" id="L168">                    result = true;   </span>
+                }   
+            }
+        }
+        
+<span class="fc" id="L173">        return result;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

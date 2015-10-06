@@ -42,6 +42,32 @@ public class AppointmentTest {
     public void tearDown() {
     }
 
+    @Test
+    (expected=Exception.class)
+    public void AppointmentException() throws Exception
+    {
+        Appointment appointment = new Appointment("", null);
+        
+        appointment = new Appointment("", timeSpan);
+        
+        appointment = new Appointment(testSubject, null);
+    }
+    
+    @Test
+    public void testAppointment() throws Exception
+    {
+        Appointment result = new Appointment(testSubject, timeSpan);
+        assertNotNull("subject must not be empty and timespan cant be null", result);
+        
+        result = new Appointment(testSubject, timeSpan);
+        assertNotNull("subject must not be empty and timespan cant be null", result.getSubject());
+        
+        result = new Appointment(testSubject, timeSpan);
+        assertNotNull("subject must not be empty and timespan cant be null", result.getTimeSpan());
+
+
+    }
+    
     /**
      * Test of getSubject method, of class Appointment.
      */
@@ -93,6 +119,20 @@ public class AppointmentTest {
         boolean expResult = true;
         boolean result = instance.addContact(contact);
         assertEquals("returned boolean: " + result + " does not equal expected boolean: " + expResult, expResult, result);
+        
+        contact = null;
+        instance = new Appointment(this.testSubject, this.timeSpan);
+        expResult = false;
+        result = instance.addContact(contact);
+        assertEquals("returned boolean: " + result + " does not equal expected boolean: " + expResult, expResult, result);
+
+        contact = new Contact(this.testName);
+        instance = new Appointment(this.testSubject, this.timeSpan);
+        instance.addContact(contact);
+        expResult = false;
+        result = instance.addContact(contact);
+        assertEquals("returned boolean: " + result + " does not equal expected boolean: " + expResult, expResult, result);
+
     }
 
     /**
@@ -108,6 +148,18 @@ public class AppointmentTest {
         boolean expResult = true;
         boolean result = instance.removeContact(contact);
         assertEquals("returned boolean: " + result + " does not equal expected boolean: " + expResult, expResult, result);
-    }
-    
+        
+        contact = null;
+        instance = new Appointment(this.testSubject, this.timeSpan);
+        expResult = false;
+        result = instance.removeContact(contact);
+        assertEquals("returned boolean: " + result + " does not equal expected boolean: " + expResult, expResult, result);
+        
+        contact = new Contact(this.testName);
+        instance = new Appointment(this.testSubject, this.timeSpan);
+        expResult = false;
+        result = instance.removeContact(contact);
+        assertEquals("returned boolean: " + result + " does not equal expected boolean: " + expResult, expResult, result);
+
+    }    
 }

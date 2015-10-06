@@ -52,7 +52,14 @@ public class TimeSpanTest {
     @After
     public void tearDown() {
     }
-
+    
+    @Test
+    (expected=IllegalArgumentException.class)
+    public void TimeSpanException()
+    {
+        TimeSpan timeSpan = new TimeSpan(incorrectBt, incorrectEt);
+    }
+    
     /**
      * Test of getBeginTime method, of class TimeSpan.
      */
@@ -109,6 +116,22 @@ public class TimeSpanTest {
         assertEquals("expected beginTime " + bt + " does not equal returned beginTime " + instance.getBeginTime(), bt, instance.getBeginTime());*/
     }
 
+    @Test
+    (expected=IllegalArgumentException.class)
+    public void setBeginTimeException()
+    {
+        TimeSpan  timeSpan = new TimeSpan(bt, et);
+        timeSpan.setBeginTime(et);
+    }
+    
+    @Test
+    (expected=IllegalArgumentException.class)
+    public void setEndTimeException()
+    {
+        TimeSpan  timeSpan = new TimeSpan(bt, et);
+        timeSpan.setBeginTime(bt);
+    }
+    
     /**
      * Test of setEndTime method, of class TimeSpan.
      */
@@ -140,6 +163,14 @@ public class TimeSpanTest {
         assertEquals("expected TimeSpan " + expResult.toString() + " does not equal returned beginTime " + instance.toString(), expResult, instance);
     }
 
+    @Test
+    (expected=IllegalArgumentException.class)
+    public void changeLengthWithException()
+    {
+        TimeSpan timeSpan = new TimeSpan(bt, et);
+        timeSpan.changeLengthWith(-1);
+    }
+    
     /**
      * Test of changeLengthWith method, of class TimeSpan.
      */
@@ -181,10 +212,16 @@ public class TimeSpanTest {
     public void testUnionWith() {
         System.out.println("unionWith");
         
-        ITimeSpan timeSpan = new TimeSpan(inBt, inEt);
-        ITimeSpan instance = new TimeSpan(bt, et);
-        ITimeSpan expResult = new TimeSpan(bt, et);
+        ITimeSpan timeSpan = new TimeSpan(bt, et);
+        ITimeSpan instance = new TimeSpan(new Time(1, 1, 1, 1, 1), new Time(3, 3, 3, 3, 3));
+        ITimeSpan expResult = null;
         ITimeSpan result = instance.unionWith(timeSpan);
+        assertEquals("expected null", expResult, result);
+        
+        timeSpan = new TimeSpan(inBt, inEt);
+        instance = new TimeSpan(bt, et);
+        expResult = new TimeSpan(bt, et);
+        result = instance.unionWith(timeSpan);
         assertEquals("expected union " + expResult.toString() + " does not equal returned union " + result.toString(), result, result);
         
         timeSpan = new TimeSpan(inBt, et);

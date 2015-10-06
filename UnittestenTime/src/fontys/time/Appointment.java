@@ -34,7 +34,7 @@ class Appointment {
     * @param timeSpan in which the appointment takes place, it cant be null
     */
     public Appointment(String subject, ITimeSpan timeSpan) throws Exception{
-        if (!subject.isEmpty() && timeSpan != null)
+        if (!subject.isEmpty() || timeSpan != null)
         {
             this.subject = subject;
             this.timeSpan = timeSpan;

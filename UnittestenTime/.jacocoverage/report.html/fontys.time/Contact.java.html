@@ -5,8 +5,11 @@
  */
 package fontys.time;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,9 +34,18 @@ public class Contact {
     * 
     * @author
     */
-<span class="nc" id="L34">    public Contact(String name){</span>
+<span class="fc" id="L37">    public Contact(String name){</span>
+<span class="pc bpc" id="L38" title="1 of 4 branches missed.">        if(name.isEmpty() || name == null){</span>
+            try {
+<span class="fc" id="L40">                throw new Exception(&quot;name cant be empty or null&quot;);</span>
+<span class="fc" id="L41">            } catch (Exception ex) {</span>
+<span class="fc" id="L42">                Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);</span>
+            }
+        }
         
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L46">        this.name = name;</span>
+<span class="fc" id="L47">        this.appointments = new ArrayList&lt;Appointment&gt;();</span>
+<span class="fc" id="L48">    }</span>
     
     
     /**
@@ -42,7 +54,7 @@ public class Contact {
     * @author
     */
     public String getName(){
-<span class="nc" id="L45">        return name;</span>
+<span class="fc" id="L57">        return name;</span>
     }
     
     /**
@@ -51,8 +63,55 @@ public class Contact {
     * @return true or false if the method fails or succeeds to add a Appointment 
     * @author
     */
-    boolean addAppointment(Appointment a){
-<span class="nc" id="L55">        return false;</span>
+    boolean addAppointment(Appointment a) throws Exception{
+<span class="fc" id="L67">        boolean result = true;</span>
+        
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        for(Appointment appointment : appointments){</span>
+            /*if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) &gt;= 0 &amp;&amp; a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getEndTime()) &lt;= 0){
+                result = false;
+                
+                try {
+                    throw new Exception(&quot;appointment cant take place during another appointment&quot;);
+                } catch (Exception ex) {
+                    Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if(a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getBeginTime()) &gt;= 0 &amp;&amp; a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) &lt;= 0){
+                result = false;
+                
+                try {
+                    throw new Exception(&quot;appointment cant take place during another appointment&quot;);
+                } catch (Exception ex) {
+                    Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }*/
+            
+<span class="pc bpc" id="L90" title="1 of 4 branches missed.">            if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) == 0 &amp;&amp; a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) == 0)</span>
+            {
+<span class="fc" id="L92">                result = false;                </span>
+            }
+
+<span class="fc bfc" id="L95" title="All 4 branches covered.">            if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) &lt; 0 &amp;&amp; a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) &lt; 0)</span>
+            {
+<span class="fc" id="L97">                result = false;</span>
+            }
+            
+<span class="fc bfc" id="L100" title="All 4 branches covered.">            if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) &gt;= 0 &amp;&amp; a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) &gt;= 0)</span>
+            {
+<span class="fc" id="L102">                result = false;</span>
+            }
+                        
+<span class="fc bfc" id="L105" title="All 4 branches covered.">            if(a.getTimeSpan().isPartOf(appointment.getTimeSpan()) || appointment.getTimeSpan().isPartOf(a.getTimeSpan()))</span>
+            {
+<span class="fc" id="L107">                result = false;</span>
+                //throw new Exception(&quot;one cant be inside the other&quot;);
+            }
+<span class="fc" id="L110">        }</span>
+        
+<span class="fc" id="L112">        this.appointments.add(a);</span>
+        
+<span class="fc" id="L114">        return result;</span>
     }
     
     /**
@@ -61,9 +120,16 @@ public class Contact {
     * @return true or false if the method fails or succeeds to add a Appointment 
     * @author
     */
-    void removeAppointment(Appointment a){
+    boolean removeAppointment(Appointment a){
+<span class="fc" id="L124">        boolean result = false;</span>
         
-<span class="nc" id="L66">    }</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if(this.appointments.contains(a)){</span>
+<span class="fc" id="L127">            this.appointments.remove(a);</span>
+<span class="fc" id="L128">            result = true;</span>
+        }
+        
+<span class="fc" id="L131">        return result;</span>
+    }
     
     /**
     * Compares Appointments. 
@@ -71,7 +137,7 @@ public class Contact {
     * @author
     */
     public Iterator&lt;Appointment&gt; appointments(){
-<span class="nc" id="L74">        return appointments.iterator();</span>
+<span class="fc" id="L140">        return appointments.iterator();</span>
     }
     
     

@@ -93,9 +93,18 @@ public class TimeSpan implements ITimeSpan {
 
     @Override
     public ITimeSpan unionWith(ITimeSpan timeSpan) {
-        if (bt.compareTo(timeSpan.getEndTime()) < 0 || et.compareTo(timeSpan.getBeginTime()) > 0) {
+        if (bt.compareTo(timeSpan.getBeginTime()) < 0 && et.compareTo(timeSpan.getBeginTime()) < 0) {
             return null;
         }
+
+        if (bt.compareTo(timeSpan.getEndTime()) > 0 && et.compareTo(timeSpan.getEndTime()) > 0) {
+            System.out.print(bt);
+            System.out.print(et);
+            System.out.print(timeSpan.getBeginTime());
+            System.out.print(timeSpan.getEndTime());
+            return null;
+        }
+
         
         ITime begintime, endtime;
         if (bt.compareTo(timeSpan.getBeginTime()) > 0) {
@@ -157,16 +166,6 @@ public class TimeSpan implements ITimeSpan {
             
                 if(this.bt.toString().equals(timeSpan.getBeginTime().toString()) && this.et.toString().equals(timeSpan.getEndTime().toString())){
                     result = true;   
-                } else{
-                    System.out.print("\n");
-                    System.out.print("--------------------------------");
-                    System.out.print("\n");
-                    System.out.print(this.bt + "\n" + timeSpan.getBeginTime());
-                    System.out.print("\n");
-                    System.out.print(this.et + "\n" + timeSpan.getEndTime());
-                    System.out.print("\n");
-                    System.out.print("--------------------------------");
-                    System.out.print("\n");
                 }   
             }
         }

@@ -10,8 +10,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
@@ -41,10 +41,19 @@ public class ContactTest {
     public void tearDown() {
     }
 
+    @Test
+    (expected=Exception.class)
+    public void ContactException()
+    {
+        Contact contact = new Contact("");
+        
+        contact = new Contact(null);
+    }
+    
     /**
      * Test of getName method, of class Contact.
      */
-    @org.junit.Test
+    @Test
     public void testGetName() {
         System.out.println("getName");
         String expResult = "Kevin";
