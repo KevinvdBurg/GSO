@@ -46,7 +46,7 @@ public class AppointmentTest {
      * Test of getSubject method, of class Appointment.
      */
     @Test
-    public void testGetSubject() {
+    public void testGetSubject() throws Exception {
         System.out.println("getSubject");
         
         Appointment instance = new Appointment(this.testSubject, this.timeSpan);
@@ -59,7 +59,7 @@ public class AppointmentTest {
      * Test of getTimeSpan method, of class Appointment.
      */
     @Test
-    public void testGetTimeSpan() {
+    public void testGetTimeSpan() throws Exception {
         System.out.println("getTimeSpan");
         
         Appointment instance = new Appointment(this.testSubject, this.timeSpan);
@@ -72,7 +72,7 @@ public class AppointmentTest {
      * Test of invitees method, of class Appointment.
      */
     @Test
-    public void testInvitees() {
+    public void testInvitees() throws Exception {
         System.out.println("invitees");
         
         Appointment instance = new Appointment(this.testSubject, this.timeSpan);
@@ -85,7 +85,7 @@ public class AppointmentTest {
      * Test of addContact method, of class Appointment.
      */
     @Test
-    public void testAddContact() {
+    public void testAddContact() throws Exception {
         System.out.println("addContact");
         
         Contact contact = new Contact(this.testName);
@@ -99,7 +99,7 @@ public class AppointmentTest {
      * Test of removeContact method, of class Appointment.
      */
     @Test
-    public void testRemoveContact() {
+    public void testRemoveContact() throws Exception {
         System.out.println("removeContact");
         
         Contact contact = new Contact(this.testName);

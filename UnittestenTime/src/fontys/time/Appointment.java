@@ -38,6 +38,7 @@ class Appointment {
         {
             this.subject = subject;
             this.timeSpan = timeSpan;
+            this.contacts = new ArrayList<>();
         }
         else{
             throw new Exception("Subject or timespan cant be empty or null");
