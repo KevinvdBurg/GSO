@@ -33,8 +33,15 @@ class Appointment {
     * @param subject of the appointment, it cant be empty or null
     * @param timeSpan in which the appointment takes place, it cant be null
     */
-    public Appointment(String subject, ITimeSpan timeSpan){
-        
+    public Appointment(String subject, ITimeSpan timeSpan) throws Exception{
+        if (!subject.isEmpty() && subject != null && timeSpan != null)
+        {
+            this.subject = subject;
+            this.timeSpan = timeSpan;
+        }
+        else{
+            throw new Exception("Subject or timespan cant be empty or null");
+        }
     }
     
     /**
@@ -43,7 +50,7 @@ class Appointment {
      * @return subject
      */
     public String getSubject(){
-        return null;
+        return subject;
     }
 
     /**
@@ -52,7 +59,7 @@ class Appointment {
      * @return timeSpan
      */
     public ITimeSpan getTimeSpan(){
-        return null;
+        return timeSpan;
         
     }
     
@@ -62,7 +69,7 @@ class Appointment {
      * @return contacts
      */
     public ArrayList<Contact> invitees(){
-        return null;
+        return contacts;
         
     }
     
@@ -73,7 +80,19 @@ class Appointment {
      * @return true when the contact has been succesfully added, false when the the contact has been unsuccesfully added
      */
     public boolean addContact(Contact contact){
-        return false;
+        
+        boolean result = false;
+        
+        if (contact != null) 
+        {
+            if(!contacts.contains(contact))
+            {
+                this.contacts.add(contact);
+                result = true;
+            } 
+        }
+                
+        return result;
         
     }
     
@@ -84,7 +103,17 @@ class Appointment {
      * @return true when the contact has been succesfully renoved, false when the contact has been unsuccesfully removed
      */
     public boolean removeContact(Contact contact){
-        return false;
+       boolean result = false;
         
+        if (contact != null) 
+        {
+            if(contacts.contains(contact))
+            {
+                this.contacts.remove(contact);
+                result = true;
+            } 
+        }
+                
+        return result;
     }
 }
