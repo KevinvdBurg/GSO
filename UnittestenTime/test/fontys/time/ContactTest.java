@@ -63,16 +63,25 @@ public class ContactTest {
      * Test of addAppointment method, of class Contact.
      */
     @org.junit.Test
-    public void testAddAppointment() {
+    public void testAddAppointment() throws Exception {
         
         System.out.println("addAppointment");
         boolean afspraak = false;
-        Appointment aa = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 0, 0), 90)); //wel
+        
+        /*Appointment aa = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 0, 0), 90)); //wel
         Appointment ab = new Appointment("Afspraak 2", new TimeSpan2(new Time(2015, 11, 5, 1, 1), 60)); //wel
         Appointment ac = new Appointment("Afspraak 3", new TimeSpan2(new Time(2015, 12, 5, 3, 2), 15)); //wel
         Appointment ad = new Appointment("Afspraak 4", new TimeSpan2(new Time(2015, 10, 5, 1, 0), 90)); //niet
         Appointment ae = new Appointment("Afspraak 5", new TimeSpan2(new Time(2015, 11, 5, 1, 30), 60)); //niet
-        Appointment af = new Appointment("Afspraak 6", new TimeSpan2(new Time(2015, 12, 5, 3, 0), 15)); //niet
+        Appointment af = new Appointment("Afspraak 6", new TimeSpan2(new Time(2015, 12, 5, 3, 0), 15)); //niet*/
+        
+        Appointment aa = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 12, 0), 60)); //wel
+        Appointment ab = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 12, 0), 60)); //false
+        Appointment ac = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 11, 30), 60)); //false
+        Appointment ad = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 12, 30), 60)); //false
+        Appointment ae = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 12, 15), 15)); //false
+        Appointment af = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 11, 0), 120)); //false
+        //Appointment ag = new Appointment("Afspraak 1", new TimeSpan2(new Time(2016, 6, 6, 6, 6), 90)); //wel
         
         //Afspraak 1
         afspraak = contactKevin.addAppointment(aa);
@@ -80,11 +89,11 @@ public class ContactTest {
         
         //Afspraak 2
         afspraak = contactKevin.addAppointment(ab);
-        assertEquals("Moet goed gaan", true, afspraak);
+        assertEquals("Moet goed gaan", false, afspraak);
         
         //Afspraak 3
         afspraak = contactKevin.addAppointment(ac);
-        assertEquals("Moet goed gaan", true, afspraak);
+        assertEquals("Moet goed gaan", false, afspraak);
         
         //Afspraak 4
         afspraak = contactKevin.addAppointment(ad);
@@ -96,15 +105,19 @@ public class ContactTest {
         
         //Afspraak 6
         afspraak = contactKevin.addAppointment(af);
-        assertEquals("Moet niet goed gaan", true, afspraak);
-            
+        assertEquals("Moet niet goed gaan", false, afspraak);
+
+        //Afspraak 7
+        //afspraak = contactKevin.addAppointment(ag);
+        //assertEquals("Moet niet goed gaan", true, afspraak);
+
     }
 
     /**
      * Test of removeAppointment method, of class Contact.
      */
     @org.junit.Test
-    public void testRemoveAppointment() {
+    public void testRemoveAppointment() throws Exception {
         Appointment aa = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 0, 0), 90)); //wel
         Appointment ab = new Appointment("Afspraak 2", new TimeSpan2(new Time(2015, 11, 5, 1, 1), 60)); //wel
         Appointment ac = new Appointment("Afspraak 3", new TimeSpan2(new Time(2015, 12, 5, 3, 2), 15)); //wel
@@ -124,7 +137,7 @@ public class ContactTest {
      * Test of appointments method, of class Contact.
      */
     @org.junit.Test
-    public void testAppointments() {
+    public void testAppointments() throws Exception {
         Appointment aa = new Appointment("Afspraak 1", new TimeSpan2(new Time(2015, 10, 5, 0, 0), 90)); //wel
         Appointment ab = new Appointment("Afspraak 2", new TimeSpan2(new Time(2015, 11, 5, 1, 1), 60)); //wel
         Appointment ac = new Appointment("Afspraak 3", new TimeSpan2(new Time(2015, 12, 5, 3, 2), 15)); //wel

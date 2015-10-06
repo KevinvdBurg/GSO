@@ -63,9 +63,13 @@ public class Contact {
     * @return true or false if the method fails or succeeds to add a Appointment 
     * @author
     */
-    boolean addAppointment(Appointment a){
+    boolean addAppointment(Appointment a) throws Exception{
+        boolean result = true;
+        
         for(Appointment appointment : appointments){
-            if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) >= 0){
+            /*if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) >= 0 && a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getEndTime()) <= 0){
+                result = false;
+                
                 try {
                     throw new Exception("appointment cant take place during another appointment");
                 } catch (Exception ex) {
@@ -73,26 +77,41 @@ public class Contact {
                 }
             }
             
-            if(a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) <= 0){
+            if(a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getBeginTime()) >= 0 && a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) <= 0){
+                result = false;
+                
                 try {
                     throw new Exception("appointment cant take place during another appointment");
                 } catch (Exception ex) {
                     Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }*/
+            
+            if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) == 0 && a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) == 0)
+            {
+                result = false;                
+            }
+
+            if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) < 0 && a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) < 0)
+            {
+                result = false;
             }
             
-            if(a.getTimeSpan().getBeginTime().compareTo(a.getTimeSpan().getEndTime()) >= 0){
-                try {
-                    throw new Exception("begintime must be after endtime");
-                } catch (Exception ex) {
-                    Logger.getLogger(Contact.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if(a.getTimeSpan().getBeginTime().compareTo(appointment.getTimeSpan().getBeginTime()) >= 0 && a.getTimeSpan().getEndTime().compareTo(appointment.getTimeSpan().getEndTime()) >= 0)
+            {
+                result = false;
+            }
+                        
+            if(a.getTimeSpan().isPartOf(appointment.getTimeSpan()) || appointment.getTimeSpan().isPartOf(a.getTimeSpan()))
+            {
+                result = false;
+                //throw new Exception("one cant be inside the other");
             }
         }
         
         this.appointments.add(a);
         
-        return true;
+        return result;
     }
     
     /**
