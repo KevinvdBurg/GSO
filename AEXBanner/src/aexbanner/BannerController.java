@@ -1,4 +1,4 @@
-package AEXBanner;
+package aexbanner;
 
 import java.util.Timer;
 import java.util.TimerTask;
