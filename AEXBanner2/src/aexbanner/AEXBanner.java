@@ -92,7 +92,7 @@ public class AEXBanner extends Application
                 prevUpdate = System.nanoTime();
                 position = 0;
                 text.relocate(position, 0);
-                setKoersen("nothing to displaly");
+                setKoersen("nothing to display");
                 super.start();
             }
         };
@@ -116,7 +116,7 @@ public class AEXBanner extends Application
     */
     public void setKoersen(String koersen) {
         //System.out.print(koersen);
-        text.setText(koersen + " - " +koersen);
+        text.setText(koersen + " : " +koersen);
         length = text.getLayoutBounds().getWidth();
     }
     

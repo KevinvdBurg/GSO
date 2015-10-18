@@ -22,18 +22,28 @@ public class MockEffectenbeurs  implements IEffectenbeurs
     public MockEffectenbeurs()
     {
         fonds = new ArrayList<>();
+        timer = new Timer();
+        class RemindTask extends TimerTask
+        {
+            @Override
+            public void run()
+            {
+                ChangeFonds();
+            }
+        }
+        timer.schedule(new RemindTask(), 1, 1000);
     }
     
-
     @Override
     public ArrayList<IFonds> getCourses()
-    {
-        ChangeFonds();
+    { 
+        //fonds = new ArrayList<>();
+        
         return fonds;
     } 
     
     public void ChangeFonds(){
-        //timer = new Timer();
+        
         for (int i = 0; i <= 2; i++)
         {
             Random r = new Random();
@@ -41,7 +51,7 @@ public class MockEffectenbeurs  implements IEffectenbeurs
 
             course = Math.round(course * 100.0) / 100.0;
 
-            IFonds fond = new Fonds("testName", course);
+            IFonds fond = new Fonds(" Bedrijf " + (i+1) + " ", course);
             fonds.add(fond);
         }
     }

@@ -7,6 +7,7 @@ package aexbanner;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.application.Platform;
 
 /**
  *
@@ -17,6 +18,7 @@ public class BannerController
     private IEffectenbeurs effectenbeurs;
     private Timer timer;
     private AEXBanner aEXBanner;
+    private String fonds;
            
     /**
     * 
@@ -44,14 +46,21 @@ public class BannerController
     }
     
     public void GetAndSetFonds(){
-    String fonds = "";
+        fonds = "";
                 
         for(IFonds fond : effectenbeurs.getCourses())
         {
-            fonds += fond.getName() + ": " + fond.getCourse();
+            fonds += fond.getName() + " + " + fond.getCourse();
         }
-
-
-        aEXBanner.setKoersen(fonds);
+        
+        Platform.runLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                aEXBanner.setKoersen(fonds);
+            }
+        });
+        
     }
 }
