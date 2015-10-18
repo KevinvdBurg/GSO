@@ -33,14 +33,7 @@ public class BannerController
             @Override
             public void run()
             {
-                String fonds = "";
-                
-                for(IFonds fond : effectenbeurs.getCourses())
-                {
-                    fonds += fond.getName() + ": " + fond.getCourse();
-                }
-                
-                aEXBanner.setKoersen(fonds);
+                GetAndSetFonds();
             }
         }
         timer.schedule(new RemindTask(), 1);
@@ -50,4 +43,15 @@ public class BannerController
         timer.cancel();
     }
     
+    public void GetAndSetFonds(){
+    String fonds = "";
+                
+        for(IFonds fond : effectenbeurs.getCourses())
+        {
+            fonds += fond.getName() + ": " + fond.getCourse();
+        }
+
+
+        aEXBanner.setKoersen(fonds);
+    }
 }
