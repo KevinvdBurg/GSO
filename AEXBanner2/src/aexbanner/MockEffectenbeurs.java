@@ -16,9 +16,9 @@ public class MockEffectenbeurs  implements IEffectenbeurs
 {
 
     @Override
-    public ArrayList<aexbanner.IFonds> getCourses()
+    public ArrayList<IFonds> getCourses()
     {
-        ArrayList<aexbanner.IFonds> fonds = new ArrayList<>();
+        ArrayList<IFonds> fonds = new ArrayList<>();
         
         for (int i = 0; i <= 2; i++)
         {

@@ -17,5 +17,5 @@ public interface IEffectenbeurs
      *
      * @return
      */
-    ArrayList<aexbanner.IFonds> getCourses();    
+    ArrayList<IFonds> getCourses();    
 }
