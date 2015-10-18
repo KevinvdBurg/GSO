@@ -7,6 +7,8 @@ package aexbanner;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -14,22 +16,34 @@ import java.util.Random;
  */
 public class MockEffectenbeurs  implements IEffectenbeurs
 {
+    private ArrayList<IFonds> fonds;
+    private Timer timer;
+    
+    public MockEffectenbeurs()
+    {
+        fonds = new ArrayList<>();
+    }
+    
 
     @Override
     public ArrayList<IFonds> getCourses()
     {
-        ArrayList<IFonds> fonds = new ArrayList<>();
-        
+        ChangeFonds();
+        return fonds;
+    } 
+    
+    public void ChangeFonds(){
+        //timer = new Timer();
         for (int i = 0; i <= 2; i++)
         {
             Random r = new Random();
             double course = 0 + (10 - 0) * r.nextDouble();
-            
+
             course = Math.round(course * 100.0) / 100.0;
-            
+
             IFonds fond = new Fonds("testName", course);
             fonds.add(fond);
         }
-        return fonds;
-    }    
+    }
+    
 }
