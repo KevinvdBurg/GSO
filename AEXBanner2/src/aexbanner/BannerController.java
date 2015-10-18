@@ -7,8 +7,6 @@ package aexbanner;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import javafx.application.Platform;
-import javafx.scene.text.Text;
 
 /**
  *
@@ -16,53 +14,40 @@ import javafx.scene.text.Text;
  */
 public class BannerController
 {
-
     private IEffectenbeurs effectenbeurs;
     private Timer timer;
-    private final AEXBanner aEXBanner;
-    private Text text;
-    String fonds;
-
+    private AEXBanner aEXBanner;
+           
     /**
-     *
-     * @param banner
-     */
-    public BannerController(AEXBanner banner)
-    {
+    * 
+    * @param banner
+    */
+    public BannerController(AEXBanner banner) {
         this.aEXBanner = banner;
         this.effectenbeurs = new MockEffectenbeurs();
-
+        
         timer = new Timer();
-
+        
         class RemindTask extends TimerTask
         {
-
             @Override
             public void run()
             {
-                 fonds = "";
-
-                for (IFonds fond : effectenbeurs.getCourses())
+                String fonds = "";
+                
+                for(IFonds fond : effectenbeurs.getCourses())
                 {
                     fonds += fond.getName() + ": " + fond.getCourse();
                 }
-                Platform.runLater(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        aEXBanner.setKoersen(fonds);
-                    }
-                });
-
+                
+                aEXBanner.setKoersen(fonds);
             }
         }
         timer.schedule(new RemindTask(), 1);
     }
-
-    public void stop()
-    {
+    
+    public void stop() {
         timer.cancel();
     }
-
+    
 }

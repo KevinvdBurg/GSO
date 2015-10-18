@@ -47,11 +47,11 @@ public class AEXBanner extends Application
         Font font = new Font("Arial", height);
         text = new Text();
         text.setFont(font);
-        text.setFill(Color.YELLOW);
+        text.setFill(Color.BLACK);
         
         Pane root = new Pane();
         root.getChildren().add(text);
-        Scene scene = new Scene(root, length, length, Color.BLACK);
+        Scene scene = new Scene(root, length, length);
         
         stage.setTitle("AEX banner");
         stage.setScene(scene);
@@ -66,17 +66,11 @@ public class AEXBanner extends Application
             public void handle(long now)
             {
                 long lag = now - prevUpdate;
-                position -= 5;
-                
-                
-               
-                if(position + (length/2) < 0)
+                position -= 10;
+
+                if(position + length < 0)
                 {
-                    position = 0;
-                }
-                else{
-                    System.out.print(length);
-                    System.out.print(position);
+                    position = width;
                 }
                 
                 if(lag >= ticks)
@@ -90,7 +84,7 @@ public class AEXBanner extends Application
             public void start()
             {
                 prevUpdate = System.nanoTime();
-                position = 0;
+                position = width;
                 text.relocate(position, 0);
                 setKoersen("nothing to displaly");
                 super.start();
@@ -115,8 +109,8 @@ public class AEXBanner extends Application
     * @param koersen
     */
     public void setKoersen(String koersen) {
-        //System.out.print(koersen);
-        text.setText(koersen + " - " +koersen);
+        System.out.print(koersen);
+        text.setText(koersen);
         length = text.getLayoutBounds().getWidth();
     }
     
