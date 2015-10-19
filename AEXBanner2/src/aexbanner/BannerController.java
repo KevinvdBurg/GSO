@@ -35,6 +35,7 @@ public class BannerController
             @Override
             public void run()
             {
+                effectenbeurs.changeFonds();
                 GetAndSetFonds();
             }
         }
@@ -53,14 +54,17 @@ public class BannerController
             fonds += fond.getName() + " + " + fond.getCourse();
         }
         
+        System.out.println("fondsen are: " + fonds);
+        
+        aEXBanner.setKoersen(fonds);
+        
 //        Platform.runLater(new Runnable()
 //        {
 //            @Override
 //            public void run()
 //            {
-                aEXBanner.setKoersen(fonds);
+//                aEXBanner.setKoersen(fonds);
 //            }
-//        });
-        
+//        });        
     }
 }

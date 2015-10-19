@@ -23,15 +23,16 @@ public class MockEffectenbeurs  implements IEffectenbeurs
     {
         fonds = new ArrayList<>();
         timer = new Timer();
-        class RemindTask extends TimerTask
-        {
-            @Override
-            public void run()
-            {
-                ChangeFonds();
-            }
-        }
-        timer.schedule(new RemindTask(), 1, 1000);
+//        class RemindTask extends TimerTask
+//        {
+//            @Override
+//            public void run()
+//            {
+//                ChangeFonds();
+//            }
+//        }
+//        timer.schedule(new RemindTask(), 1, 1000);
+        fonds.add(new Fonds("bedrijf1", 0.43));
     }
     
     @Override
@@ -42,7 +43,7 @@ public class MockEffectenbeurs  implements IEffectenbeurs
         return fonds;
     } 
     
-    public void ChangeFonds(){
+    public void changeFonds(){
         
         for (int i = 0; i <= 2; i++)
         {

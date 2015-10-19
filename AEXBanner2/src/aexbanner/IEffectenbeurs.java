@@ -18,4 +18,6 @@ public interface IEffectenbeurs
      * @return
      */
     ArrayList<IFonds> getCourses();    
+    
+    void changeFonds();
 }
