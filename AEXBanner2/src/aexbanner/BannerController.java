@@ -53,14 +53,14 @@ public class BannerController
             fonds += fond.getName() + " + " + fond.getCourse();
         }
         
-        Platform.runLater(new Runnable()
-        {
-            @Override
-            public void run()
-            {
+//        Platform.runLater(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
                 aEXBanner.setKoersen(fonds);
-            }
-        });
+//            }
+//        });
         
     }
 }

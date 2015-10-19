@@ -115,7 +115,7 @@ public class AEXBanner extends Application
     * @param koersen
     */
     public void setKoersen(String koersen) {
-        //System.out.print(koersen);
+        System.out.println("koers: " + koersen);
         text.setText(koersen + " : " +koersen);
         length = text.getLayoutBounds().getWidth();
     }
