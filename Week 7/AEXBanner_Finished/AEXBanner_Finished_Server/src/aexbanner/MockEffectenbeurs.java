@@ -8,7 +8,6 @@ package aexbanner;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,11 +16,7 @@ import java.util.Random;
  *
  * @author HP user
  */
-public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenbeurs{ 
-    public MockEffectenbeurs() throws RemoteException
-    {
-        
-    }
+public class MockEffectenbeurs implements IEffectenbeurs, Serializable, Remote{ 
     
     private List<IFonds> fondsen = new ArrayList<IFonds>();
 
@@ -35,13 +30,11 @@ public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenb
             }
         }
         fondsen.add(newKoers);
-        System.out.println("beurs koersen: " + fondsen.toString());
         return newKoers;
     }
     
     @Override
-    public List<IFonds> getKoersen() throws RemoteException {
-//        System.out.println("beurs koersen: " + fondsen.toString());
+    public List<IFonds> getKoersen() throws RemoteException { 
         return fondsen;
     }
     

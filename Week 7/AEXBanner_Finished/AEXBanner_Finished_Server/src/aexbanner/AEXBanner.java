@@ -85,7 +85,7 @@ public class AEXBanner extends Application {
     public void setKoersen(String koersen) {
         text.setText(koersen +" "+koersen);
         textLength = text.getLayoutBounds().getWidth();
-        System.out.println(koersen);
+        System.out.print(text);
     }
 
     @Override

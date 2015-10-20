@@ -19,6 +19,8 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Example of RMI using Registry
@@ -72,8 +74,18 @@ public class RMIServer {
                 this.mockEffectenbeurs = mockEffectenbeurs;
             }
             
+            @Override
             public void run()
             {
+                try
+                {
+                    mockEffectenbeurs.setKoers("bedrijf1", mockEffectenbeurs.getRandomKoers());
+//                    System.out.println("this: " + mockEffectenbeurs.getKoersen().toString());
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(RMIServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 // Bind beurs administration using registry
                 try {
                     registry.rebind(bindingName, mockEffectenbeurs);
@@ -84,7 +96,7 @@ public class RMIServer {
             }
         }
         
-        timer.schedule(new UpdateTask(bindingName, mockEffectenbeurs), 1);
+        timer.schedule(new UpdateTask(bindingName, mockEffectenbeurs), 1, 1);
     }
 
     // Print IP addresses and network interfaces
@@ -134,9 +146,9 @@ public class RMIServer {
 
         // Create server
         RMIServer server = new RMIServer();
-        while (true)
-        {
-            
-        }
+//        while (true)
+//        {            
+//            
+//        }
     }
 }
