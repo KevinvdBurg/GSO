@@ -32,4 +32,9 @@ public class Koers implements IFonds{
         return this.koers;
     }
     
+    @Override
+    public String toString(){
+        return naam + " : " + koers;
+    }
+    
 }
