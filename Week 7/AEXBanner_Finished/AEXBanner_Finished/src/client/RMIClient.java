@@ -21,7 +21,7 @@ import java.util.Scanner;
 public class RMIClient {
 
     // Set binding name for student administration
-    private static final String bindingName = "MockEffectenbeurs";
+    private static final String bindingName = "KoersAdmin";
 
     // References to registry and student administration
     private Registry registry = null;
@@ -61,11 +61,11 @@ public class RMIClient {
             try {
                 beurs = (MockEffectenbeurs) registry.lookup(bindingName);
             } catch (RemoteException ex) {
-                System.out.println("Client: Cannot bind student administration");
+                System.out.println("Client: Cannot bind koers administration");
                 System.out.println("Client: RemoteException: " + ex.getMessage());
                 beurs = null;
             } catch (NotBoundException ex) {
-                System.out.println("Client: Cannot bind student administration");
+                System.out.println("Client: Cannot bind koers administration");
                 System.out.println("Client: NotBoundException: " + ex.getMessage());
                 beurs = null;
             }
@@ -117,7 +117,7 @@ public class RMIClient {
         // Add student Jan to student administration
         try {
             Koers koers = beurs.setKoers("Jan Inc", beurs.getRandomKoers());
-            System.out.println("Client: Student " + beurs.toString() + " added to student administration");
+            System.out.println("Client: Koers " + beurs.toString() + " added to Koers administration");
         } catch (RemoteException ex) {
             System.out.println("Client: Cannot add first koers to beurs administration");
             System.out.println("Client: RemoteException: " + ex.getMessage());
@@ -126,9 +126,9 @@ public class RMIClient {
         // Add student Jan to student administration
         try {
             Koers koers = beurs.setKoers("Freek Inc", beurs.getRandomKoers());
-            System.out.println("Client: Student " + beurs.toString() + " added to student administration");
+            System.out.println("Client: Koers " + beurs.toString() + " added to Koers administration");
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot add first koers to student administration");
+            System.out.println("Client: Cannot add first koers to Koers administration");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
 
@@ -144,7 +144,7 @@ public class RMIClient {
         try {
             System.out.println("Client: second Koers: " + beurs.getKoersen().get(1));
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get first student");
+            System.out.println("Client: Cannot get first Koers");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
 
@@ -152,7 +152,7 @@ public class RMIClient {
         try {
             System.out.println("Client: third Koers: " + beurs.getKoersen().get(2));
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get first student");
+            System.out.println("Client: Cannot get third Koers");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
     }

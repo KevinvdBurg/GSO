@@ -26,11 +26,10 @@ public class RMIServer {
     private static final int portNumber = 1099;
 
     // Set binding name for student administration
-    private static final String bindingName = "StudentAdmin";
+    private static final String bindingName = "KoersAdmin";
 
     // References to registry and student administration
     private Registry registry = null;
-    //private StudentAdmin studentAdmin = null;
     
     private MockEffectenbeurs mockEffectenbeurs = null;
 
@@ -108,5 +107,9 @@ public class RMIServer {
 
         // Create server
         RMIServer server = new RMIServer();
+        while (true)
+        {            
+            
+        }
     }
 }
