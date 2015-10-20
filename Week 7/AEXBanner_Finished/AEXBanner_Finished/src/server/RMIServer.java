@@ -53,11 +53,11 @@ public class RMIServer {
             registry = null;
         }
 
-        // Bind student administration using registry
+        // Bind beurs administration using registry
         try {
             registry.rebind(bindingName, mockEffectenbeurs);
         } catch (RemoteException ex) {
-            System.out.println("Server: Cannot bind student administration");
+            System.out.println("Server: Cannot bind beurs administration");
             System.out.println("Server: RemoteException: " + ex.getMessage());
         }
     }

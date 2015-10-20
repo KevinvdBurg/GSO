@@ -6,8 +6,11 @@
 
 package aexbanner;
 
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 
 public class BannerController {
@@ -32,14 +35,20 @@ public class BannerController {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    fondsen = effectenbeurs.getKoersen();
-                    for (IFonds f : fondsen){
-                        alleFondsen = alleFondsen + " " +  f.getNaam() + " " + f.getKoers();
+                    try
+                    {
+                        fondsen = effectenbeurs.getKoersen();
+                        for (IFonds f : fondsen){
+                            alleFondsen = alleFondsen + " " +  f.getNaam() + " " + f.getKoers();
+                        }
+                        
+                        banner.setKoersen(alleFondsen);
+                        alleFondsen = "";
+                        fondsen.clear();
+                    } catch (RemoteException ex)
+                    {
+                        Logger.getLogger(BannerController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    banner.setKoersen(alleFondsen);
-                    alleFondsen = "";
-                    fondsen.clear();
                 }
             });
             }
