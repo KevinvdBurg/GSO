@@ -5,6 +5,8 @@
  */
 package aexbanner;
 
+import java.util.Random;
+
 /**
  *
  * @author milton
@@ -34,7 +36,12 @@ public class Fonds implements aexbanner.IFonds
     @Override
     public double getCourse()
     {
-        return this.course;
+        Random r = new Random();
+        double randomValue = 0 + (20 - 0) * r.nextDouble();
+        randomValue = Math.round(randomValue * 100.0) / 100.0;
+        
+        return randomValue;
+//        return this.course;
     }
 
 }

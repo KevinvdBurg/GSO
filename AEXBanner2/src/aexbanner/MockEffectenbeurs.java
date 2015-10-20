@@ -33,6 +33,9 @@ public class MockEffectenbeurs  implements IEffectenbeurs
 //        }
 //        timer.schedule(new RemindTask(), 1, 1000);
         fonds.add(new Fonds("bedrijf1", 0.43));
+        fonds.add(new Fonds("bedrijf2", 0.43));
+        fonds.add(new Fonds("bedrijf3", 0.43));
+        fonds.add(new Fonds("bedrijf4", 0.43));
     }
     
     @Override
@@ -45,16 +48,16 @@ public class MockEffectenbeurs  implements IEffectenbeurs
     
     public void changeFonds(){
         
-        for (int i = 0; i <= 2; i++)
-        {
-            Random r = new Random();
-            double course = 0 + (10 - 0) * r.nextDouble();
-
-            course = Math.round(course * 100.0) / 100.0;
-
-            IFonds fond = new Fonds(" Bedrijf " + (i+1) + " ", course);
-            fonds.add(fond);
-        }
+//        for (int i = 0; i <= 2; i++)
+//        {
+//            Random r = new Random();
+//            double course = 0 + (10 - 0) * r.nextDouble();
+//
+//            course = Math.round(course * 100.0) / 100.0;
+//
+//            IFonds fond = new Fonds(" Bedrijf " + (i+1) + " ", course);
+//            fonds.add(fond);
+//        }
     }
     
 }
