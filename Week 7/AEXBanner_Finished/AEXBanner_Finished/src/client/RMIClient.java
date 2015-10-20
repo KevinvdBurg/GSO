@@ -121,7 +121,7 @@ public class RMIClient {
             Koers koers = beurs.setKoers("Jan Inc", beurs.getRandomKoers());
             System.out.println("Client: Student " + beurs.toString() + " added to student administration");
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot add first student to student administration");
+            System.out.println("Client: Cannot add first koers to beurs administration");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
 
@@ -130,31 +130,31 @@ public class RMIClient {
             Koers koers = beurs.setKoers("Freek Inc", beurs.getRandomKoers());
             System.out.println("Client: Student " + beurs.toString() + " added to student administration");
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot add first student to student administration");
+            System.out.println("Client: Cannot add first koers to student administration");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
 
         // Get first student
         try {
-            System.out.println("Client: First student: " + beurs.getKoersen().get(0));
+            System.out.println("Client: First Koers: " + beurs.getKoersen().get(0));
         } catch (RemoteException ex) {
             System.out.println("Client: Cannot get first student");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
 
-        // Get second student
+        // Get first student
         try {
-            System.out.println("Client: Second student: " + studentAdmin.getStudent(1));
+            System.out.println("Client: second Koers: " + beurs.getKoersen().get(1));
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get second student");
+            System.out.println("Client: Cannot get first student");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
 
         // Get third student (does not exist)
         try {
-            System.out.println("Client: Third student: " + studentAdmin.getStudent(2));
+            System.out.println("Client: third Koers: " + beurs.getKoersen().get(2));
         } catch (RemoteException ex) {
-            System.out.println("Client: Cannot get third student");
+            System.out.println("Client: Cannot get first student");
             System.out.println("Client: RemoteException: " + ex.getMessage());
         }
     }
