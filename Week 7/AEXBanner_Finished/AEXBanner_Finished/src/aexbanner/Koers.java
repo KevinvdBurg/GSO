@@ -5,13 +5,15 @@
  */
 package aexbanner;
 
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.Random;
 
 /**
  *
  * @author HP user
  */
-public class Koers implements IFonds{
+public class Koers implements IFonds, Serializable{
     String naam;
     double koers;
 

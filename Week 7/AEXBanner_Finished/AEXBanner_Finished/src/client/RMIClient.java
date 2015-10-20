@@ -163,6 +163,7 @@ public class RMIClient {
         }
     }
 
+    
     // Main method
     public static void main(String[] args) {
 

@@ -4,6 +4,8 @@
  */
 package server;
 
+import aexbanner.IEffectenbeurs;
+import aexbanner.IFonds;
 import aexbanner.Koers;
 import aexbanner.MockEffectenbeurs;
 import java.net.InetAddress;
@@ -14,6 +16,8 @@ import java.util.Enumeration;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Example of RMI using Registry
@@ -51,7 +55,9 @@ public class RMIServer {
             System.out.println("Server: RemoteException: " + ex.getMessage());
             registry = null;
         }
-
+        
+        mockEffectenbeurs.setKoers("Test", 10);
+        
         // Bind beurs administration using registry
         try {
             registry.rebind(bindingName, mockEffectenbeurs);
@@ -59,6 +65,8 @@ public class RMIServer {
             System.out.println("Server: Cannot bind beurs administration");
             System.out.println("Server: RemoteException: " + ex.getMessage());
         }
+        
+        
     }
 
     // Print IP addresses and network interfaces
@@ -93,6 +101,7 @@ public class RMIServer {
             System.out.println("Server: UnknownHostException: " + ex.getMessage());
         }
     }
+    
 
     /**
      * @param args the command line arguments

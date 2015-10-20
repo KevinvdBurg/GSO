@@ -9,7 +9,7 @@ package aexbanner;
  *
  * @author HP user
  */
-public interface IFonds {
+public interface IFonds  {
     String getNaam();
     double getKoers();
 }
