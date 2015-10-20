@@ -19,18 +19,17 @@ public class MockEffectenbeurs implements IEffectenbeurs, Serializable, Remote{
     
     private List<IFonds> fondsen = new ArrayList<IFonds>();
 
-    public void setKoers(String naam, int koers){
+    public Koers setKoers(String naam, int koers){
         Koers newKoers = new Koers(naam, koers);
         
         for(IFonds koer :  fondsen){
             if (koer.getNaam().equals(newKoers.getNaam()))
             {
                 koer = newKoers;
-                return;
             }
-            
         }
         fondsen.add(newKoers);
+        return newKoers;
     }
     
     @Override
@@ -38,7 +37,7 @@ public class MockEffectenbeurs implements IEffectenbeurs, Serializable, Remote{
         return fondsen;
     }
     
-     public double getRandomKoers() {
+     public int getRandomKoers() {
         
         Random random = new Random();
         int a = random.nextInt(99 - 10 + 1) + 10;
