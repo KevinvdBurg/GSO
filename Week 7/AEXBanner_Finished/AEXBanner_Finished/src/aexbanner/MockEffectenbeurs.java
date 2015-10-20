@@ -8,6 +8,7 @@ package aexbanner;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,11 @@ import java.util.Random;
  *
  * @author HP user
  */
-public class MockEffectenbeurs implements IEffectenbeurs, Serializable, Remote{ 
+public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenbeurs{ 
+    public MockEffectenbeurs() throws RemoteException
+    {
+        
+    }
     
     private List<IFonds> fondsen = new ArrayList<IFonds>();
 

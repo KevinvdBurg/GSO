@@ -28,7 +28,7 @@ public class BannerController {
     private static final String bindingName = "KoersAdmin";
     private Registry registry = null;
 
-    public BannerController(AEXBanner banner) {
+    public BannerController(AEXBanner banner) throws RemoteException {
         
         this.banner = banner;
         //this.effectenbeurs = new MockEffectenbeurs();
@@ -84,9 +84,11 @@ public class BannerController {
         
         // Start polling timer: update banner every two seconds
         pollingTimer = new Timer();
+        fondsen = effectenbeurs.getKoersen();
         
         class PeriodiekeActie extends java.util.TimerTask {
             String alleFondsen = "";
+            
             @Override
             public void run() {
             Platform.runLater(new Runnable() {
