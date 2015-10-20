@@ -7,6 +7,7 @@ package aexbanner;
 
 import java.io.Serializable;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,11 +34,11 @@ public class MockEffectenbeurs implements IEffectenbeurs, Serializable, Remote{
     }
     
     @Override
-    public List<IFonds> getKoersen(){
+    public List<IFonds> getKoersen() throws RemoteException { 
         return fondsen;
     }
     
-     public int getRandomKoers() {
+     public int getRandomKoers() throws RemoteException {
         
         Random random = new Random();
         int a = random.nextInt(99 - 10 + 1) + 10;
