@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aexbanner;
+package shared;
+
+import java.io.Serializable;
+import java.rmi.Remote;
 
 /**
  *
  * @author HP user
  */
-public interface IFonds  {
+public interface IFonds extends Serializable  {
     String getNaam();
     double getKoers();
 }

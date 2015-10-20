@@ -4,10 +4,7 @@
  */
 package server;
 
-import aexbanner.IEffectenbeurs;
-import aexbanner.IFonds;
-import aexbanner.Koers;
-import aexbanner.MockEffectenbeurs;
+import shared.IEffectenbeurs;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -39,7 +36,7 @@ public class RMIServer {
     private MockEffectenbeurs mockEffectenbeurs = null;
 
     // Constructor
-    public RMIServer() {
+    public RMIServer() throws RemoteException {
 
         // Print port number for registry
         System.out.println("Server: Port number " + portNumber);
@@ -124,7 +121,7 @@ public class RMIServer {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
 
         // Welcome message
         System.out.println("SERVER USING REGISTRY");
