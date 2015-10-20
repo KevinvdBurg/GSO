@@ -33,11 +33,13 @@ public class AEXBanner extends Application {
     private double textPosition;
     private BannerController bannerController;
     private AnimationTimer animationTimer;
+    private RMIClient client;
 
     @Override
     public void start(Stage primaryStage) throws RemoteException {
 
-        bannerController = new BannerController(this);
+        //bannerController = new BannerController(this);
+        client = new RMIClient("127.0.0.1", 1099, this);
 
         Font font = new Font("Arial", HEIGHT);
         text = new Text("jjk");
@@ -93,6 +95,11 @@ public class AEXBanner extends Application {
     public void stop() {
         animationTimer.stop();
         bannerController.stop();
+    }
+    
+    public static void main(String[] args)
+    {
+        AEXBanner banner = new AEXBanner();
     }
 }
 

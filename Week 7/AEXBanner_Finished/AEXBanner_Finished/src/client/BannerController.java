@@ -31,45 +31,43 @@ public class BannerController {
 
     public BannerController(AEXBanner banner) throws RemoteException {
         
-        this.banner = banner;
-        //this.effectenbeurs = new MockEffectenbeurs();
-        
-        
-        
-        // Start polling timer: update banner every two seconds
-        pollingTimer = new Timer();
-        fondsen = effectenbeurs.getKoersen();
-        
-        class PeriodiekeActie extends java.util.TimerTask {
-            String alleFondsen = "";
-            
-            @Override
-            public void run() {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    try
-                    {
-                        fondsen = effectenbeurs.getKoersen();
-                        for (IFonds f : fondsen){
-                            alleFondsen = alleFondsen + " " +  f.getNaam() + " " + f.getKoers();
-                        }
-                        
-                        banner.setKoersen(alleFondsen);
-                        
-//                        System.out.println("controller fondsen: " + alleFondsen);
-                        
-                        alleFondsen = "";
-                        fondsen.clear();
-                    } catch (RemoteException ex)
-                    {
-                        Logger.getLogger(BannerController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            }
-        }
-        pollingTimer.schedule(new PeriodiekeActie(),0,2000);
+//        this.banner = banner;
+//        //this.effectenbeurs = new MockEffectenbeurs();
+//        
+//        // Start polling timer: update banner every two seconds
+//        pollingTimer = new Timer();
+//        fondsen = effectenbeurs.getKoersen();
+//        
+//        class PeriodiekeActie extends java.util.TimerTask {
+//            String alleFondsen = "";
+//            
+//            @Override
+//            public void run() {
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try
+//                    {
+//                        fondsen = effectenbeurs.getKoersen();
+//                        for (IFonds f : fondsen){
+//                            alleFondsen = alleFondsen + " " +  f.getNaam() + " " + f.getKoers();
+//                        }
+//                        
+//                        banner.setKoersen(alleFondsen);
+//                        
+////                        System.out.println("controller fondsen: " + alleFondsen);
+//                        
+//                        alleFondsen = "";
+//                        fondsen.clear();
+//                    } catch (RemoteException ex)
+//                    {
+//                        Logger.getLogger(BannerController.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//            });
+//            }
+//        }
+//        pollingTimer.schedule(new PeriodiekeActie(),0,2000);
         
 
     }
@@ -80,7 +78,7 @@ public class BannerController {
         // Stop simulation timer of effectenbeurs
         // TODO
     }
-    
+     
     
 }
 

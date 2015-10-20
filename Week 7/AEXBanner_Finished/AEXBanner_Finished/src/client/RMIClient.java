@@ -14,6 +14,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import shared.IFonds;
 import shared.IEffectenbeurs;
 
@@ -24,7 +26,7 @@ import shared.IEffectenbeurs;
  *
  * @author Nico Kuijpers
  */
-public class RMIClient {
+public class RMIClient{
 
     // Set binding name for student administration
     private static final String bindingName = "KoersAdmin";
@@ -33,12 +35,17 @@ public class RMIClient {
     private Registry registry = null;
     private ArrayList<IFonds> koersen;
     private IEffectenbeurs beurs;
-    private AEXBanner banner;
+    private static AEXBanner banner;
+    private static String ipAddress = "localhost";
+    private static int portNumber = 1099;
 
     // Constructor
-    public RMIClient(String ipAddress, int portNumber) {
-
-        banner = new AEXBanner();
+    public RMIClient(String ipAddress, int portNumber, AEXBanner banner) {
+        
+        
+        this.banner = banner;
+        this.ipAddress = ipAddress;
+        this.portNumber = portNumber;
         
         // Print IP address and port number for registry
         System.out.println("Client: IP Address: " + ipAddress);
@@ -92,7 +99,6 @@ public class RMIClient {
         // Test RMI connection
         if (koersen != null) {
 
-            
             Timer timer = new Timer();
             
             class UpdateTask extends java.util.TimerTask
@@ -149,20 +155,21 @@ public class RMIClient {
     
     // Main method
     public static void main(String[] args) {
-
-        // Welcome message
-        System.out.println("CLIENT USING REGISTRY");
-
-        // Get ip address of server
-        Scanner input = new Scanner(System.in);
-        System.out.print("Client: Enter IP address of server: ");
-        String ipAddress = input.nextLine();
-
-        // Get port number
-        System.out.print("Client: Enter port number: ");
-        int portNumber = input.nextInt();
+//
+//        // Welcome message
+//        System.out.println("CLIENT USING REGISTRY");
+//
+//        // Get ip address of server
+//        Scanner input = new Scanner(System.in);
+//        System.out.print("Client: Enter IP address of server: ");
+//        String ipAddress = input.nextLine();
+//
+//        // Get port number
+//        System.out.print("Client: Enter port number: ");
+//        int portNumber = input.nextInt();
 
         // Create client
-        RMIClient client = new RMIClient(ipAddress, portNumber);
+        RMIClient client = new RMIClient(ipAddress, portNumber, banner);
     }
+
 }
