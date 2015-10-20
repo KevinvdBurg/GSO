@@ -7,6 +7,7 @@ package aexbanner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -18,16 +19,25 @@ public class MockEffectenbeurs implements IEffectenbeurs{
     
     @Override
     public List<IFonds> getKoersen() {
-        Fonds f = new Fonds(0);
-        Fonds f1 = new Fonds(1);
-        Fonds f2 = new Fonds(2);
-        Fonds f3 = new Fonds(3);
+        
+        Koers f = new Koers("Kevin Corp", getRandomKoers());
+        Koers f1= new Koers("Martin Corp", getRandomKoers());
+        Koers f2 = new Koers("Milton Corp", getRandomKoers());
+        Koers f3 = new Koers("Mark Corp", getRandomKoers());
+        
         fondsen.add(f);
         fondsen.add(f1);
         fondsen.add(f2);
         fondsen.add(f3);
         
         return fondsen;
+    }
+    
+     public double getRandomKoers() {
+        
+        Random random = new Random();
+        int a = random.nextInt(99 - 10 + 1) + 10;
+        return a;
     }
     
 }
