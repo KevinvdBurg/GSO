@@ -5,6 +5,7 @@
  */
 package aexbanner;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +14,7 @@ import java.util.Random;
  *
  * @author HP user
  */
-public class MockEffectenbeurs implements IEffectenbeurs{
+public class MockEffectenbeurs implements IEffectenbeurs, Serializable{ 
     
     private List<IFonds> fondsen = new ArrayList<IFonds>();
     
