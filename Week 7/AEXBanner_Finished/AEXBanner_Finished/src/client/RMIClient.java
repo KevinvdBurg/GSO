@@ -80,7 +80,7 @@ public class RMIClient {
 
         // Test RMI connection
         if (beurs != null) {
-            testStudentAdministration();
+            testKoersAdministration();
         }
     }
 
@@ -105,7 +105,7 @@ public class RMIClient {
     
 
     // Test RMI connection
-    private void testStudentAdministration() {
+    private void testKoersAdministration() {
         
         try {
             System.out.println("Client: Number of koersen: " + beurs.getKoersen().size());
