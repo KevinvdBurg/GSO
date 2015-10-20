@@ -30,13 +30,11 @@ public class MockEffectenbeurs implements IEffectenbeurs, Serializable, Remote{
             }
         }
         fondsen.add(newKoers);
-        System.out.println("beurs koersen: " + fondsen.toString());
         return newKoers;
     }
     
     @Override
-    public List<IFonds> getKoersen() throws RemoteException {
-//        System.out.println("beurs koersen: " + fondsen.toString());
+    public List<IFonds> getKoersen() throws RemoteException { 
         return fondsen;
     }
     

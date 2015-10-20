@@ -101,7 +101,7 @@ public class BannerController {
                         
                         banner.setKoersen(alleFondsen);
                         
-//                        System.out.println("controller fondsen: " + alleFondsen);
+                        System.out.println(alleFondsen.toString());
                         
                         alleFondsen = "";
                         fondsen.clear();
