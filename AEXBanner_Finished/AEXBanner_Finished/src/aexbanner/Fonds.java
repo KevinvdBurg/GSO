@@ -41,7 +41,11 @@ public class Fonds implements IFonds{
 
     @Override
     public double getKoers() {
-        int a = rnd.nextInt(50);
+        
+        Random random = new Random();
+        int a = random.nextInt(99 - 10 + 1) + 10;
+        
+        
         return a;
     }
     

@@ -64,17 +64,18 @@ public class AEXBanner extends Application {
                     textPosition = textPosition - 3;
                     text.relocate(textPosition,0);
                     prevUpdate = now;
-                    if (textPosition < -1600){
-                        textPosition = 1000;
+                    
+                    if (textPosition < -3265){
+                        textPosition = 0;
                     }
                 }                
             }
             @Override
             public void start() {
                 prevUpdate = System.nanoTime();
-                textPosition = WIDTH;
+                textPosition = 0;
                 text.relocate(textPosition, 0);
-                setKoersen("aa");
+                setKoersen("Nothing to Display");
                 super.start();
             }
         };
@@ -82,8 +83,9 @@ public class AEXBanner extends Application {
     }
 
     public void setKoersen(String koersen) {
-        text.setText(koersen);
+        text.setText(koersen +" "+koersen);
         textLength = text.getLayoutBounds().getWidth();
+        System.out.print(textLength);
     }
 
     @Override
