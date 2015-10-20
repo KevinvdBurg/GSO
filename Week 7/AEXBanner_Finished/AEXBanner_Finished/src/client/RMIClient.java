@@ -150,7 +150,13 @@ public class RMIClient {
 
         // Get third student (does not exist)
         try {
-            System.out.println("Client: third Koers: " + beurs.getKoersen().get(2));
+            try
+            {
+                System.out.println("Client: third Koers: " + beurs.getKoersen().get(2));   
+            } catch (IndexOutOfBoundsException e)
+            {
+                System.out.println("Client: third Koers does not exist");
+            }
         } catch (RemoteException ex) {
             System.out.println("Client: Cannot get third Koers");
             System.out.println("Client: RemoteException: " + ex.getMessage());
