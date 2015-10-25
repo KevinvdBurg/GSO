@@ -18,14 +18,14 @@ import java.util.logging.Logger;
  * @author Kevin van der Burg & Milton van de Sanden
  */
 public class RMIServer {
-    public final static int PORT = 4444;
+    public final static int port = 4444;
     Registry registry;
     IEffectenbeurs beurs;
     
     
     public RMIServer() {
         try {
-            registry = LocateRegistry.createRegistry(RMIServer.PORT);
+            registry = LocateRegistry.createRegistry(RMIServer.port);
             
             List<IFonds> fonds = new ArrayList<>();
             fonds.add(new Koers("Kevin Corp", 0.00));
@@ -59,9 +59,12 @@ public class RMIServer {
             server.start();
             Scanner s = new Scanner(System.in);
             System.out.println("Type q to stop.");
-            while(!s.nextLine().equals("q")) {
+            
+            while(!s.nextLine().equals("q"))
+            {
                 System.out.println("Type q to stop.");
             }
+            
             server.stop();
         } catch (RemoteException ex) {
             Logger.getLogger(RMIServer.class.getName()).log(Level.SEVERE, null, ex);

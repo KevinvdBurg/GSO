@@ -33,46 +33,46 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
 
     /**
      * Public constructor
-     * @param banner AEXBanner instance die Application overeft.
+     * @param banner AEXBanner inherits application.
      * @throws RemoteException
      */
     public BannerController(AEXBanner banner) throws RemoteException {
         try {
             this.banner = banner;
-            this.client = LocateRegistry.getRegistry(RMIServer.PORT);
+            this.client = LocateRegistry.getRegistry(RMIServer.port);
             
-            ((IEffectenbeurs) client.lookup("beurs")).addListener(this, "fonds");
+            ((IEffectenbeurs) client.lookup("beurs")).addListener(this, "koersen");
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(BannerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     * Stopt beide timers. In de controller maar ook effectenbeurs.
+     * stops both timers in banner and effectenbeurs
      */
     public void stop() {
         try {
-            ((IEffectenbeurs) client.lookup("beurs")).removeListener(this, "fonds");
+            ((IEffectenbeurs) client.lookup("beurs")).removeListener(this, "koersen");
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(BannerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void updateString(List<IFonds> fonds) {
+    private void updateString(List<IFonds> koersen) {
         try {
             StringBuilder b = new StringBuilder();
             
-            for(IFonds s : fonds)
-                b.append(String.format("%s %02.2f \t\t", s.getName(), s.getValue()));
+            for(IFonds koers : koersen)
+                b.append(String.format("%s %02.2f \t\t", koers.getName(), koers.getKoers()));
             
-            banner.setValues(b.toString());
+            banner.setKoersen(b.toString());
         } catch (RemoteException ex) {
             Logger.getLogger(BannerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     @Override
-        public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
-                updateString((List<IFonds>) evt.getNewValue());
-        }    
+    public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
+        updateString((List<IFonds>) evt.getNewValue());
+    }    
 }

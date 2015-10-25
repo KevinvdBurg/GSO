@@ -8,11 +8,11 @@ import shared.IFonds;
  */
 public class Koers implements IFonds {
     private String name;
-    private double value;
+    private double koers;
     
-    public Koers(String name, double value) {
+    public Koers(String name, double koers) {
         this.name = name;
-        this.value = value;
+        this.koers = koers;
     }
     
     @Override
@@ -21,12 +21,12 @@ public class Koers implements IFonds {
     }
 
     @Override
-    public double getValue() {
-        return value;
+    public double getKoers() {
+        return this.koers;
     }
     
-    public void setValue(double value) {
-        this.value = value;
+    public void setKoers(double koers) {
+        this.koers = koers;
     }
     
 }

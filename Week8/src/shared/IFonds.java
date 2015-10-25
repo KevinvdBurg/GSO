@@ -11,16 +11,14 @@ import java.rmi.RemoteException;
 public interface IFonds extends Remote, Serializable {
     
     /**
-     * Get the name of this stock
-     * @return name of stock
-     * @throws RemoteException when RMI does not like you 
+     * @return String
+     * @throws RemoteException
      */
     public String getName() throws RemoteException;
     
     /**
-     * Get the value of this stock
-     * @return double value of this stock
-     * @throws RemoteException when RMI does not like you
+     * @return double
+     * @throws RemoteException
      */
-    public double getValue() throws RemoteException;
+    public double getKoers() throws RemoteException;
 }

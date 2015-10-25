@@ -17,40 +17,42 @@ import java.util.TimerTask;
  * @author Kevin van der Burg & Milton van de Sanden
  */
 public class MockEffectenBeurs extends UnicastRemoteObject implements IEffectenbeurs {
-    private List<IFonds> fonds;
+    private List<IFonds> koersen;
     private transient Timer timer;
-    private transient Random rand;
+    private transient Random random;
     private transient BasicPublisher publisher;
     
-    public MockEffectenBeurs(List<IFonds> stocks) throws RemoteException {
-        this.fonds = stocks;
-        publisher = new BasicPublisher(new String[]{"fonds"});
+    public MockEffectenBeurs(List<IFonds> koersen) throws RemoteException {
+        this.koersen = koersen;
+        publisher = new BasicPublisher(new String[]{"koersen"});
     }
     
     public MockEffectenBeurs() throws RemoteException {
-        fonds = new ArrayList<>();
-        publisher = new BasicPublisher(new String[]{"fonds"});
+        koersen = new ArrayList<>();
+        publisher = new BasicPublisher(new String[]{"koersen"});
     }
     
     @Override
-    public List<IFonds> getValues() {        
-        return Collections.unmodifiableList(fonds);
+    public List<IFonds> getKoersen() {        
+        return Collections.unmodifiableList(koersen);
     }
     
     /**
      * Start random stock timer. Generates new values every 3 seconds.
      */
     public void start() {
-        if(timer == null) {
-            this.rand = new Random();
+        if(timer == null)
+        {
+            this.random = new Random();
             this.timer = new Timer();
+            
             this.timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    fonds.stream().forEach((f) -> {
-                        ((Koers) f).setValue(rand.nextDouble() + rand.nextInt(100));
+                    koersen.stream().forEach((f) -> {
+                        ((Koers) f).setKoers(random.nextDouble() + random.nextInt(100));
                     });
-                    publisher.inform(this, "fonds", null, getValues());
+                    publisher.inform(this, "koersen", null, getKoersen());
                 }      
             }, 0, 3000);
         }

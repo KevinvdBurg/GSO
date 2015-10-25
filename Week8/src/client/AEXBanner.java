@@ -17,27 +17,27 @@ import javafx.stage.Stage;
 
 public class AEXBanner extends Application {
 
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 100;
-    public static final int NANO_TICKS = 20000000; 
+    public static final int width = 1000;
+    public static final int height = 100;
+    public static final int nanoTicks = 20000000; 
     // FRAME_RATE = 1000000000/NANO_TICKS = 50;
 
     private Text text;
     private double textLength;
     private double textPosition;
-    private BannerController controller;
+    private BannerController banner;
     private AnimationTimer animationTimer;
 
     @Override
     public void start(Stage primaryStage) {
 
         try {
-            controller = new BannerController(this);
+            banner = new BannerController(this);
         }
         catch(RemoteException ex) {
-            setValues("Could not create controller");
+            setKoersen("Could not create banner");
         }
-        Font font = new Font("Arial", HEIGHT);
+        Font font = new Font("Arial", height);
         text = new Text();
         text.setFont(font);
         text.setFill(Color.YELLOW);
@@ -45,14 +45,12 @@ public class AEXBanner extends Application {
         Pane root = new Pane();
         root.setStyle("-fx-background-color: black;");
         root.getChildren().add(text);
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
+        Scene scene = new Scene(root, width, height);
         
-
         primaryStage.setTitle("AEX banner");
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.toFront();
-
 
         // Start animation: text moves from right to left
         animationTimer = new AnimationTimer() {
@@ -61,11 +59,15 @@ public class AEXBanner extends Application {
             @Override
             public void handle(long now) {
                 long lag = now - prevUpdate;
-                if (lag >= NANO_TICKS) {
+                if (lag >= nanoTicks) {
                     // calculate new location of text
                     textPosition -= 10;
+                    
                     if((text.getLayoutBounds().getWidth() + textPosition) < 0)
-                        textPosition = WIDTH;
+                    {
+                        textPosition = width;   
+                    }
+                    
                     text.relocate(textPosition,0);
                     prevUpdate = now;
                 }
@@ -73,24 +75,25 @@ public class AEXBanner extends Application {
             @Override
             public void start() {
                 prevUpdate = System.nanoTime();
-                textPosition = WIDTH;
+                textPosition = width;
                 text.relocate(textPosition, 0);
-                setValues("Nothing to display");
+                setKoersen("Nothing to display");
                 super.start();
             }
         };
+        
         animationTimer.start();
     }
 
-    public void setValues(String values) {
-        text.setText(values);
+    public void setKoersen(String koersen) {
+        text.setText(koersen);
         textLength = text.getLayoutBounds().getWidth();
     }
 
     @Override
     public void stop() {
         animationTimer.stop();
-        controller.stop();
+        banner.stop();
     }
     
     public static void main(String[] args) {
