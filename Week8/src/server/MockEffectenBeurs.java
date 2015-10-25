@@ -49,8 +49,8 @@ public class MockEffectenBeurs extends UnicastRemoteObject implements IEffectenb
             this.timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    koersen.stream().forEach((f) -> {
-                        ((Koers) f).setKoers(random.nextDouble() + random.nextInt(100));
+                    koersen.stream().forEach((koers) -> {
+                        ((Koers) koers).setKoers(random.nextDouble() + random.nextInt(100));
                     });
                     publisher.inform(this, "koersen", null, getKoersen());
                 }      
