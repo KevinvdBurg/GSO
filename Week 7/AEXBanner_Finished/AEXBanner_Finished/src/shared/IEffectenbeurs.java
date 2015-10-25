@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author HP user
+ * @author Kevin van der Burg & Milton van de Sanden
  */
 public interface IEffectenbeurs extends Remote {
     public List<IFonds> getKoersen() throws RemoteException;

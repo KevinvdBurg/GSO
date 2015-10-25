@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/milton/Documents/GitHub/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/server/RMIServer.java</file>
-            <file>file:/C:/Users/milton/Documents/GitHub/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/client/AEXBanner.java</file>
-            <file>file:/C:/Users/milton/Documents/GitHub/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/client/RMIClient.java</file>
-            <file>file:/C:/Users/milton/Documents/GitHub/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/client/UpdateTask.java</file>
-            <file>file:/C:/Users/milton/Documents/GitHub/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/client/BannerController.java</file>
-            <file>file:/C:/Users/milton/Documents/GitHub/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/shared/IFonds.java</file>
-            <file>file:/C:/Users/milton/Documents/GitHub/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/server/Koers.java</file>
+            <file>file:/Users/kvdb/Documents/Codes/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/shared/IFonds.java</file>
+            <file>file:/Users/kvdb/Documents/Codes/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/shared/IEffectenbeurs.java</file>
+            <file>file:/Users/kvdb/Documents/Codes/GSO/Week%207/AEXBanner_Finished/AEXBanner_Finished/src/server/RMIServer.java</file>
         </group>
     </open-files>
 </project-private>

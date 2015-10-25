@@ -10,7 +10,7 @@ import java.rmi.Remote;
 
 /**
  *
- * @author HP user
+ * @author Kevin van der Burg & Milton van de Sanden
  */
 public interface IFonds extends Serializable  {
     String getNaam();
