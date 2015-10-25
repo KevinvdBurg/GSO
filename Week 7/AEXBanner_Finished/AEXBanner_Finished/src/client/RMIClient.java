@@ -11,15 +11,10 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import shared.IFonds;
 import shared.IEffectenbeurs;
-
-
 
 /**
  * Example of RMI using Registry
@@ -40,10 +35,9 @@ public class RMIClient{
     private static int portNumber = 1099;
 
     // Constructor
-    public RMIClient(String ipAddress, int portNumber, AEXBanner banner) {
-        
-        
-        this.banner = banner;
+    public RMIClient(String ipAddress, int portNumber) {
+//        this.banner = banner;
+        this.banner = new AEXBanner();
         this.ipAddress = ipAddress;
         this.portNumber = portNumber;
         
@@ -97,40 +91,11 @@ public class RMIClient{
         }
 
         // Test RMI connection
-        if (koersen != null) {
+        if (beurs != null) {
 
             Timer timer = new Timer();
             
-            class UpdateTask extends java.util.TimerTask
-            {
-                private IEffectenbeurs beurs;
-                private String koersen;
-                
-                public UpdateTask(IEffectenbeurs beurs)
-                {
-                    this.beurs = beurs;
-                }
-                
-                @Override
-                public void run()
-                {
-                   koersen = "";
-                   
-                    try
-                    {
-                        for(IFonds koers : beurs.getKoersen())
-                        {
-                            koersen += koersen.toString();
-                        }} catch (RemoteException ex)
-                    {
-                        Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                    banner.setKoersen(koersen);
-                }
-            }
-            
-            timer.schedule(new UpdateTask(beurs), 1);
+            timer.schedule(new UpdateTask(beurs, banner), 1);
         }
     }
 
@@ -155,21 +120,21 @@ public class RMIClient{
     
     // Main method
     public static void main(String[] args) {
-//
-//        // Welcome message
-//        System.out.println("CLIENT USING REGISTRY");
-//
-//        // Get ip address of server
-//        Scanner input = new Scanner(System.in);
-//        System.out.print("Client: Enter IP address of server: ");
-//        String ipAddress = input.nextLine();
-//
-//        // Get port number
-//        System.out.print("Client: Enter port number: ");
-//        int portNumber = input.nextInt();
+
+        // Welcome message
+        System.out.println("CLIENT USING REGISTRY");
+
+        // Get ip address of server
+        Scanner input = new Scanner(System.in);
+        System.out.print("Client: Enter IP address of server: ");
+        ipAddress = input.nextLine();
+
+        // Get port number
+        System.out.print("Client: Enter port number: ");
+        portNumber = input.nextInt();
 
         // Create client
-        RMIClient client = new RMIClient(ipAddress, portNumber, banner);
+        RMIClient client = new RMIClient(ipAddress, portNumber);
     }
 
 }

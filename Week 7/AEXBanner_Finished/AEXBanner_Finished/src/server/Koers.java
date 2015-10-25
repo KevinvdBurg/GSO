@@ -6,9 +6,6 @@
 package server;
 
 import shared.IFonds;
-import java.io.Serializable;
-import java.rmi.Remote;
-import java.util.Random;
 
 /**
  *

@@ -39,7 +39,7 @@ public class AEXBanner extends Application {
     public void start(Stage primaryStage) throws RemoteException {
 
         //bannerController = new BannerController(this);
-        client = new RMIClient("127.0.0.1", 1099, this);
+//        client = new RMIClient("127.0.0.1", 1099/*, this*/);
 
         Font font = new Font("Arial", HEIGHT);
         text = new Text("jjk");

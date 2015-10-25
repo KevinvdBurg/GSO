@@ -4,7 +4,6 @@
  */
 package server;
 
-import shared.IEffectenbeurs;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -13,8 +12,6 @@ import java.util.Enumeration;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 
 /**
@@ -131,9 +128,11 @@ public class RMIServer {
 
         // Create server
         RMIServer server = new RMIServer();
+        
+        System.out.println("waiting for client");
         while (true)
         {
-            
+
         }
     }
 }

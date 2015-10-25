@@ -15,4 +15,7 @@ import java.rmi.Remote;
 public interface IFonds extends Serializable  {
     String getNaam();
     double getKoers();
+    
+    @Override
+    String toString();
 }
