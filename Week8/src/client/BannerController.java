@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +31,7 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
     private transient AEXBanner banner;
     private transient IEffectenbeurs beurs;
     private Registry client;
-
+    private DecimalFormat decimalFormat = new DecimalFormat("#00.00");
     /**
      * Public constructor
      * @param banner AEXBanner inherits application.
@@ -62,10 +63,12 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
         try {
             StringBuilder b = new StringBuilder();
             
-            for(IFonds koers : koersen)
-                b.append(String.format("%s %02.2f \t\t", koers.getName(), koers.getKoers()));
-            
-            banner.setKoersen(b.toString());
+            for(IFonds koers : koersen){
+                String newKoers = decimalFormat.format(koers.getKoers());
+                b.append(String.format("%s %s - ", koers.getName(), newKoers));  
+            }
+                
+            banner.setKoersen(b.toString() + b.toString());
         } catch (RemoteException ex) {
             Logger.getLogger(BannerController.class.getName()).log(Level.SEVERE, null, ex);
         }

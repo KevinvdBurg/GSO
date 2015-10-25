@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author Kevin van der Burg & Milton van de Sanden
  */
 public class RMIServer {
-    public final static int port = 4444;
+    public final static int port = 1099;
     Registry registry;
     IEffectenbeurs beurs;
     

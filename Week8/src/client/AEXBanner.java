@@ -63,9 +63,9 @@ public class AEXBanner extends Application {
                     // calculate new location of text
                     textPosition -= 10;
                     
-                    if((text.getLayoutBounds().getWidth() + textPosition) < 0)
+                    if((text.getLayoutBounds().getWidth() + textPosition) < (textLength/2))
                     {
-                        textPosition = width;   
+                        textPosition = 0;   
                     }
                     
                     text.relocate(textPosition,0);
@@ -75,7 +75,7 @@ public class AEXBanner extends Application {
             @Override
             public void start() {
                 prevUpdate = System.nanoTime();
-                textPosition = width;
+                textPosition = 0;
                 text.relocate(textPosition, 0);
                 setKoersen("Nothing to display");
                 super.start();
@@ -86,7 +86,7 @@ public class AEXBanner extends Application {
     }
 
     public void setKoersen(String koersen) {
-        text.setText(koersen);
+        text.setText(koersen + " " + koersen);
         textLength = text.getLayoutBounds().getWidth();
     }
 
