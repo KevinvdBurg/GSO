@@ -32,6 +32,7 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
     private transient IEffectenbeurs beurs;
     private Registry client;
     private DecimalFormat decimalFormat = new DecimalFormat("#00.00");
+    
     /**
      * Public constructor
      * @param banner AEXBanner inherits application.
@@ -59,6 +60,10 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
         }
     }
     
+    /**
+     * Update the display text
+     * @param koersen A list of koersen to be updated
+     */
     private void updateString(List<IFonds> koersen) {
         try {
             StringBuilder b = new StringBuilder();

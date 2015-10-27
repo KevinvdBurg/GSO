@@ -20,7 +20,6 @@ public class AEXBanner extends Application {
     public static final int width = 1000;
     public static final int height = 100;
     public static final int nanoTicks = 20000000; 
-    // FRAME_RATE = 1000000000/NANO_TICKS = 50;
 
     private Text text;
     private double textLength;
@@ -28,6 +27,11 @@ public class AEXBanner extends Application {
     private BannerController banner;
     private AnimationTimer animationTimer;
 
+    
+    /**
+    * Starts the program
+    * @param primaryStage
+    */
     @Override
     public void start(Stage primaryStage) {
 
@@ -52,7 +56,6 @@ public class AEXBanner extends Application {
         primaryStage.show();
         primaryStage.toFront();
 
-        // Start animation: text moves from right to left
         animationTimer = new AnimationTimer() {
             private long prevUpdate;
 
@@ -85,11 +88,19 @@ public class AEXBanner extends Application {
         animationTimer.start();
     }
 
+    /**
+     * Set the "Koers" to display
+     * @param koersen all the "koersen" to display
+     */
     public void setKoersen(String koersen) {
         text.setText(koersen + " " + koersen);
         textLength = text.getLayoutBounds().getWidth();
     }
 
+    /**
+     * 
+     * Stops the program
+     */
     @Override
     public void stop() {
         animationTimer.stop();

@@ -22,16 +22,29 @@ public class MockEffectenBeurs extends UnicastRemoteObject implements IEffectenb
     private transient Random random;
     private transient BasicPublisher publisher;
     
+    /**
+     * Public constructor
+     * @param koersen A list of all the "koersen" 
+     * @throws RemoteException 
+     */
     public MockEffectenBeurs(List<IFonds> koersen) throws RemoteException {
         this.koersen = koersen;
         publisher = new BasicPublisher(new String[]{"koersen"});
     }
     
+    /**
+     * Public constructor with no parameters
+     * @throws RemoteException
+     */
     public MockEffectenBeurs() throws RemoteException {
         koersen = new ArrayList<>();
         publisher = new BasicPublisher(new String[]{"koersen"});
     }
     
+    /**
+     * 
+     * @return list of koersen
+     */
     @Override
     public List<IFonds> getKoersen() {        
         return Collections.unmodifiableList(koersen);

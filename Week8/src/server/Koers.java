@@ -10,6 +10,11 @@ public class Koers implements IFonds {
     private String name;
     private double koers;
     
+    /**
+     * Public constructor
+     * @param name the name of the "Koers"
+     * @param koers the value of the "Koers"
+     */
     public Koers(String name, double koers) {
         this.name = name;
         this.koers = koers;
@@ -25,6 +30,10 @@ public class Koers implements IFonds {
         return this.koers;
     }
     
+    /**
+     *
+     * @param koers the value of the "Koers"
+     */
     public void setKoers(double koers) {
         this.koers = koers;
     }
