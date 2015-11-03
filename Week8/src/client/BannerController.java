@@ -31,6 +31,7 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
     private transient AEXBanner banner;
     private transient IEffectenbeurs beurs;
     private Registry client;
+    private static String ipAddress = "localhost";
     private DecimalFormat decimalFormat = new DecimalFormat("#00.00");
     
     /**
@@ -41,7 +42,7 @@ public class BannerController extends UnicastRemoteObject implements IRemoteProp
     public BannerController(AEXBanner banner) throws RemoteException {
         try {
             this.banner = banner;
-            this.client = LocateRegistry.getRegistry(RMIServer.port);
+            this.client = LocateRegistry.getRegistry(ipAddress, RMIServer.port);
             
             ((IEffectenbeurs) client.lookup("beurs")).addListener(this, "koersen");
         } catch (RemoteException | NotBoundException ex) {

@@ -1,5 +1,7 @@
 package server;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import shared.IEffectenbeurs;
 import shared.IFonds;
 import java.rmi.NoSuchObjectException;
@@ -37,6 +39,17 @@ public class RMIServer {
             fonds.add(new Koers("The Game", 0.00));
             
             beurs = new MockEffectenBeurs(fonds);
+            
+            InetAddress localhost;
+            try
+            {
+                localhost = InetAddress.getLocalHost();
+                System.out.println("Server: IP Address: " + localhost.getHostAddress());
+            } catch (UnknownHostException ex)
+            {
+                Logger.getLogger(RMIServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             
             registry.rebind("beurs", beurs);
             
